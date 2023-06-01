@@ -25,12 +25,19 @@ public class GravityAffected : MonoBehaviour
 
         Grounded = CheckIfGrounded(GroundedDistance);
         if (CheckIfGrounded(50))
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
+        {
+            //Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+
+             transform.rotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
+        }
+          
 
         if (!Grounded) 
             transform.GetComponent<Rigidbody>().AddForce((Planet.position - transform.position).normalized * AttractionStrength, ForceMode.Force);
         else if (Grounded) transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+        Planet = null;
         //else if is the band aid ive done for rn 
 
     }
@@ -38,6 +45,7 @@ public class GravityAffected : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (!Planet) return;
         Gizmos.color = Color.magenta;
         Gizmos.DrawRay(transform.position, (Planet.position - transform.position).normalized * Distance);
         Gizmos.color = Color.green;
