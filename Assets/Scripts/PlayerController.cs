@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-
+[RequireComponent(typeof(GravityAffected))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -17,5 +17,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+    }
+    void FindGround()
+    {
+
     }
 }

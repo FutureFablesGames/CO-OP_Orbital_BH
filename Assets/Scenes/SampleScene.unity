@@ -147,12 +147,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577794104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 19.14, z: 1.8963332}
+  m_LocalPosition: {x: 0, y: 28.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 686737923}
-  - {fileID: 1362454709}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,6 +169,7 @@ GameObject:
   - component: {fileID: 686737920}
   - component: {fileID: 686737919}
   - component: {fileID: 686737918}
+  - component: {fileID: 686737924}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -203,7 +203,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &686737920
 CapsuleCollider:
@@ -280,10 +280,30 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1362454709}
   m_Father: {fileID: 577794105}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &686737924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686737917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a09c4f333cb434c8a022b78251156d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  GroundedDistance: 1.17
+  Planet: {fileID: 0}
+  AttractionStrength: 0
+  Distance: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +410,7 @@ GameObject:
   - component: {fileID: 926043701}
   - component: {fileID: 926043700}
   - component: {fileID: 926043699}
+  - component: {fileID: 926043703}
   m_Layer: 3
   m_Name: Planet
   m_TagString: Untagged
@@ -475,6 +496,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &926043703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926043698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f142334b44b808049825d704dc346c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GravityRange: 7.2
+  GravityStrength: 5.5
+  WhatIsGravityAffected:
+    serializedVersion: 2
+    m_Bits: 55
+  colls: []
 --- !u!1 &1362454708
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +544,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 577794105}
-  m_RootOrder: 1
+  m_Father: {fileID: 686737923}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 19.719, y: 0, z: 0}
 --- !u!81 &1362454710
 AudioListener:
