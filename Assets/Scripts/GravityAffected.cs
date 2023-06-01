@@ -30,6 +30,9 @@ public class GravityAffected : MonoBehaviour
         if (!Grounded) 
             transform.GetComponent<Rigidbody>().AddForce((Planet.position - transform.position).normalized * AttractionStrength, ForceMode.Force);
         else if (Grounded) transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        //else if is the band aid ive done for rn 
+
     }
 
 
