@@ -9,7 +9,7 @@ public class GravityAffected : MonoBehaviour
     [Range(0, 5)] public float GroundedDistance;
     [HideInInspector] public Transform Planet;
     [HideInInspector] public float AttractionStrength, Distance;
-    private bool Grounded = false;
+    [HideInInspector] public bool Grounded = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +45,13 @@ public class GravityAffected : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (!Planet) return;
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawRay(transform.position, (Planet.position - transform.position).normalized * Distance);
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, transform.rotation * Vector2.down * GroundedDistance);
+        if (!Planet) return;
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, (Planet.position - transform.position).normalized * Distance);
+       
     }
     public bool CheckIfGrounded(float dist)
     {

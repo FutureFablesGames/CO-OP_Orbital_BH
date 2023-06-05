@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 
 public class Bullet : MonoBehaviour
 {
@@ -16,8 +16,8 @@ public class Bullet : MonoBehaviour
     void Update()
     { 
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+ 
+    private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
     }

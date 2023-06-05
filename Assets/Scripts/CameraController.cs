@@ -27,7 +27,8 @@ public class CameraController : MonoBehaviour
         //Set Rotations
         // transform.parent.GetChild(0).localRotation = Quaternion.Euler(0, MouseInput.x, 0);    
         transform.parent.RotateAround(RotatePoint.position, RotatePoint.rotation * Vector3.up, MouseInput.x);
-       // MouseInput.x = 0;
+        //if(transform.parent.GetComponent<GravityAffected>().Grounded==false)
+        //    MouseInput.x = 0;
         gameObject.transform.localRotation = Direction;
     }
 }

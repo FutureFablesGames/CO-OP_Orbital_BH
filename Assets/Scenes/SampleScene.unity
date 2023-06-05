@@ -306,6 +306,7 @@ MonoBehaviour:
   Planet: {fileID: 0}
   AttractionStrength: 0
   Distance: 0
+  Grounded: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,11 +594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f142334b44b808049825d704dc346c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GravityRange: 7.5
+  GravityRange: 9.6
   GravityStrength: 5.5
   WhatIsGravityAffected:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 119
   colls: []
 --- !u!1 &1057348031
 GameObject:
@@ -873,8 +874,8 @@ GameObject:
   - component: {fileID: 1957709227}
   - component: {fileID: 1957709226}
   - component: {fileID: 1957709225}
-  - component: {fileID: 1957709224}
   - component: {fileID: 1957709229}
+  - component: {fileID: 1957709224}
   - component: {fileID: 1957709230}
   m_Layer: 0
   m_Name: Capsule
@@ -902,6 +903,7 @@ MonoBehaviour:
   Planet: {fileID: 0}
   AttractionStrength: 0
   Distance: 0
+  Grounded: 0
 --- !u!136 &1957709225
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -974,7 +976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957709223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 17.98, z: 12.89}
+  m_LocalPosition: {x: 1.12, y: 26.51, z: 7.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1011,16 +1013,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WhatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
-  BulletPrefab: {fileID: 0}
-  SightRange: 8.87
+    m_Bits: 64
+  BulletPrefab: {fileID: 8179267936944871428, guid: ec808a4b162f1ce4f905d1ea4f34162f, type: 3}
+  SightRange: 15
   Target: {fileID: 0}
   TimeBetweenAttacks: 1
   CanShoot: 1
   TimeBetweenVolleys: 1
   NumberOfVolleys: 1
-  BulletsPerVolley: 0
-  BulletSpread: 1
+  BulletsPerVolley: 8
+  BulletSpread: 1.88
   Targets: []
   OGTargets: []
 --- !u!114 &3894563543947363842
@@ -1051,10 +1053,11 @@ MonoBehaviour:
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  GroundedDistance: 1.37
+  GroundedDistance: 1.14
   Planet: {fileID: 0}
   AttractionStrength: 0
   Distance: 0
+  Grounded: 0
 --- !u!1 &8420609713627806708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8420609714742116473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6877117, y: 28.75, z: 0.82}
+  m_LocalPosition: {x: 2.6877117, y: 29.63, z: 0.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1233,7 +1236,7 @@ GameObject:
   - component: {fileID: 8420609714742116450}
   - component: {fileID: 6027228892800166187}
   - component: {fileID: 3894563543947363842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

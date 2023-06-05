@@ -12,7 +12,7 @@ public abstract class BulletEmitter : MonoBehaviour
     public LayerMask WhatIsPlayer;
     public GameObject BulletPrefab;
     [Range(0, 15)] public float SightRange = 1;
-    [HideInInspector] public Transform Target;
+     public Transform Target;
     [Range(0, 15)] public float TimeBetweenAttacks = 1;
     [HideInInspector] public WaitForSeconds AttackTimer = new WaitForSeconds(1);
     [HideInInspector] public bool CanShoot = true;
