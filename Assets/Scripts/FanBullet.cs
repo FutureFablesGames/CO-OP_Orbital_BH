@@ -8,7 +8,7 @@ using UnityEngine;
     [HideInInspector] public WaitForSeconds VollyTimer = new WaitForSeconds(1);
     [Range(0, 5)] public int NumberOfVolleys = 1;
     [VTRangeStep(2f, 10f, 2f)] public float BulletsPerVolley;
-    [Range(0,5f)] public float BulletSpread = 1;
+    [Range(0,1f)] public float BulletSpread = 1;
     public List<Vector3> Targets,OGTargets;
     private Vector3 Difference;
     public override void Awake()
@@ -30,25 +30,33 @@ using UnityEngine;
            return;
         //  
         RaycastHit hit;
-         Gizmos.DrawLine(transform.position, Target.position);
+        Gizmos.DrawLine(transform.position, Target.position);
         Physics.Raycast(transform.position, (Target.position- transform.position ).normalized, out hit, 1000f,WhatIsPlayer);
         Gizmos.DrawLine(transform.position, hit.point);
-        Vector3 axis = Vector3.Cross(Target.up, Target.right);
 
-        Vector3 point = Quaternion.AngleAxis(90, Target.up)* hit.normal.normalized;
+        Difference = Quaternion.AngleAxis(90, Target.up)* hit.normal.normalized;
+       
         int j = 0;
      
        for (int i = -(int)BulletsPerVolley; i <= (int)BulletsPerVolley; i += 2)
-       {
-           OGTargets[j] = Target.position + ((i / BulletsPerVolley) * BulletSpread * point);
-           Targets[j] = (OGTargets[j] - transform.position).normalized * (Target.position - transform.position).magnitude;
-           Gizmos.DrawSphere(OGTargets[j], 0.25f);
+        {
+            Gizmos.color = Color.yellow;
+            OGTargets[j] = Target.position + (((i*Mathf.Abs(i)) / BulletsPerVolley) * BulletSpread * Difference);
+            Targets[j] = transform.position + (OGTargets[j]-transform.position).normalized * (hit.point - transform.position).magnitude;
 
-           Gizmos.color = Color.green;
-           Gizmos.DrawSphere(Targets[j], 0.25f);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(OGTargets[j], 0.25f);
+            Gizmos.DrawLine(OGTargets[j], Targets[j]);
+            Gizmos.DrawLine(OGTargets[0], OGTargets[OGTargets.Count - 1]);
+
+            //to show actual trajectory
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(Targets[j], 0.25f);
+            Gizmos.DrawLine(Targets[j], transform.position);
             j++;
-       }
-        Gizmos.DrawLine(hit.point, hit.point + point);
+        }
+        Gizmos.DrawLine(hit.point, hit.point + Difference);
        ////used j bc im too lazy to do the math
        //int j = 0;
        //for (int i = -(int)BulletsPerVolley; i <= (int)BulletsPerVolley; i += 2)
@@ -61,7 +69,7 @@ using UnityEngine;
        //
        //    //to show actual trajectory
        //    Gizmos.color = Color.green;
-       //    Gizmos.DrawSphere(Targets[j], 0.25f);
+       //    Gizmos.DrawSphere(Targets[j], 0.25f);we
        //    Gizmos.DrawLine(Targets[j], transform.position);
        //    j++;
        //}         
