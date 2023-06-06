@@ -681,7 +681,7 @@ MonoBehaviour:
   GravityStrength: 5.5
   WhatIsGravityAffected:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 503
   colls: []
 --- !u!1 &1020154570
 GameObject:
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 1957709229}
   - component: {fileID: 1957709224}
   - component: {fileID: 1957709230}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1213,8 +1213,11 @@ MonoBehaviour:
   WhatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
   BulletPrefab: {fileID: 8179267936944871428, guid: ec808a4b162f1ce4f905d1ea4f34162f, type: 3}
-  SightRange: 15
+  SightRange: 6.81
   Target: {fileID: 0}
   TimeBetweenAttacks: 1
   CanShoot: 1
@@ -1222,8 +1225,9 @@ MonoBehaviour:
   NumberOfVolleys: 1
   BulletsPerVolley: 6
   BulletSpread: 1
+  ArcTargets: []
+  PrelimTargets: []
   Targets: []
-  OGTargets: []
 --- !u!114 &3894563543947363842
 MonoBehaviour:
   m_ObjectHideFlags: 0

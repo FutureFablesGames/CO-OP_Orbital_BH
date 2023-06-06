@@ -9,7 +9,7 @@ public enum TypeOfEmitter
 
 public abstract class BulletEmitter : MonoBehaviour
 {
-    public LayerMask WhatIsPlayer;
+    public LayerMask WhatIsPlayer,WhatIsGround;
     public GameObject BulletPrefab;
     [Range(0, 15)] public float SightRange = 1;
      public Transform Target;
