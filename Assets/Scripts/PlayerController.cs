@@ -6,6 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(GravityAffected))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Resources")]
+    public float CurrentResources;
+    public float MaxResources = 500.0f;
+
+    [Header("Other")]
     [Range(0, 25)] public float Speed;
     private Rigidbody rb;
     private void Awake()
@@ -22,4 +27,16 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vec.normalized* Speed *2);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Deposit")
+        {
+            other.GetComponent<ResourceDepot>().Deposit(this, CurrentResources);
+        }
+
+        if (other.tag == "Resource")
+        {
+            other.GetComponent<ResourceNode>().Interact(this);
+        }
+    }
 }
