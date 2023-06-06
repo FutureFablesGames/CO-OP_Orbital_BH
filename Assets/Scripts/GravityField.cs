@@ -21,9 +21,12 @@ public class GravityField : MonoBehaviour
         colls = (Physics.OverlapSphere(transform.position, GravityRange + BasePlanetCircumference, WhatIsGravityAffected));
         foreach(Collider coll in colls)
         {
-            coll.transform.GetComponent<GravityAffected>().AttractionStrength = GravityStrength;
-            coll.transform.GetComponent<GravityAffected>().Planet = transform;
-            coll.transform.GetComponent<GravityAffected>().Distance = GravityRange;
+            if (coll.GetComponent<GravityAffected>() != null)
+            {
+                coll.transform.GetComponent<GravityAffected>().AttractionStrength = GravityStrength;
+                coll.transform.GetComponent<GravityAffected>().Planet = transform;
+                coll.transform.GetComponent<GravityAffected>().Distance = GravityRange;
+            }            
         }
     }
     private void OnDrawGizmos()
