@@ -17,7 +17,7 @@ public class GravityField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BasePlanetCircumference = GetComponent<SphereCollider>().radius * transform.lossyScale.magnitude * (2 / Mathf.PI);
+       BasePlanetCircumference = GetComponent<SphereCollider>().radius * transform.lossyScale.magnitude * (2 / Mathf.PI);
         colls = (Physics.OverlapSphere(transform.position, GravityRange + BasePlanetCircumference, WhatIsGravityAffected));
         foreach(Collider coll in colls)
         {

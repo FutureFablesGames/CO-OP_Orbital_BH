@@ -25,21 +25,17 @@ public class GravityAffected : MonoBehaviour
 
         Grounded = CheckIfGrounded(GroundedDistance);
         if (CheckIfGrounded(50))
-        {
-            //Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
-
-             transform.rotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
-        }
-          
-
+           transform.rotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
+        
+        //succ to the ground
         if (!Grounded) 
             transform.GetComponent<Rigidbody>().AddForce((Planet.position - transform.position).normalized * AttractionStrength, ForceMode.Force);
-        else if (Grounded) transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        else if (Grounded) transform.GetComponent<Rigidbody>().velocity *= 0.9f;
 
+        //this bc planet assigned every frame so cancel 
+        //cancel bc then it can leave the grav field
         Planet = null;
-        //else if is the band aid ive done for rn 
-
+        
     }
 
 
