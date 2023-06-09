@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Resource
   - Deposit
+  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(GravityAffected))]
 public class PlayerController : MonoBehaviour
@@ -9,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [Header("Resources")]
     public float CurrentResources;
     public float MaxResources = 500.0f;
+
+    [Header("UI")]
+    public TMP_Text PromptDisplay = null;
 
     [Header("Other")]
     [Range(0, 25)] public float Speed;
@@ -29,14 +34,32 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Deposit")
+        if (other.tag == "Interactable")
         {
-            other.GetComponent<ResourceDepot>().Deposit(this, CurrentResources);
+            if (!PromptDisplay.enabled) {
+                PromptDisplay.text = "'E' to Interact";
+                PromptDisplay.enabled = true;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                other.GetComponent<Interactable>().Interact(this);
+                PromptDisplay.text = "";
+                PromptDisplay.enabled = false;
+            }
+            
         }
+    }
 
-        if (other.tag == "Resource")
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Interactable")
         {
-            other.GetComponent<ResourceNode>().Interact(this);
+            if (PromptDisplay.enabled)
+            {
+                PromptDisplay.text = "";
+                PromptDisplay.enabled = false;
+            }
         }
     }
 }

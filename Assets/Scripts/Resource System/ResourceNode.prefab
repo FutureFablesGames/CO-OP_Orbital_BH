@@ -93,10 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5361066402985339727}
   - component: {fileID: 1909890185124954379}
-  - component: {fileID: 1746181584946129709}
+  - component: {fileID: 7429484354812911611}
   m_Layer: 0
   m_Name: ResourceNode
-  m_TagString: Resource
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 0
---- !u!65 &1746181584946129709
-BoxCollider:
+--- !u!135 &7429484354812911611
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,8 +142,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 1.3512925
+  m_Center: {x: 0, y: 0.8512925, z: 0}
 --- !u!1 &8833831208483291245
 GameObject:
   m_ObjectHideFlags: 0
