@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -905,7 +905,7 @@ MonoBehaviour:
   GravityStrength: 5.5
   WhatIsGravityAffected:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 503
   colls: []
 --- !u!1 &1057348031
 GameObject:
@@ -1185,7 +1185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1855800566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1424,16 +1424,73 @@ MonoBehaviour:
     m_Bits: 0
   BulletPrefab: {fileID: 8179267936944871428, guid: ec808a4b162f1ce4f905d1ea4f34162f, type: 3}
   SightRange: 15
-  Target: {fileID: 0}
   TimeBetweenAttacks: 1
-  CanShoot: 1
   TimeBetweenVolleys: 1
   NumberOfVolleys: 1
   BulletsPerVolley: 8
   BulletSpread: 1.88
+  Target: {fileID: 0}
+  CanShoot: 1
   ArcTargets: []
   PrelimTargets: []
   Targets: []
+--- !u!1001 &2622895966147492732
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304102, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622895966453304104, guid: fae981090335db445a11f5d730dc4db1, type: 3}
+      propertyPath: m_Name
+      value: OscillateBulletEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fae981090335db445a11f5d730dc4db1, type: 3}
 --- !u!114 &3894563543947363842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1708,7 @@ GameObject:
   - component: {fileID: 3894563543947363842}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

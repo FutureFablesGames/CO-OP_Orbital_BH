@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GravityAffected : MonoBehaviour
 {
     public LayerMask WhatIsGround;
@@ -10,13 +11,7 @@ public class GravityAffected : MonoBehaviour
     [HideInInspector] public Transform Planet;
     [HideInInspector] public float AttractionStrength, Distance;
     [HideInInspector] public bool Grounded = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
 

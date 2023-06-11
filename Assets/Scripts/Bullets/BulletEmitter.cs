@@ -8,12 +8,20 @@ public enum TypeOfEmitter
 }
 
 public abstract class BulletEmitter : MonoBehaviour
-{
+{   
     public LayerMask WhatIsPlayer,WhatIsGround;
     public GameObject BulletPrefab;
     [Range(0, 15)] public float SightRange = 1;
-     public Transform Target;
+
+    [Header("BulletVolley Specifics" + "\n")]
     [Range(0, 15)] public float TimeBetweenAttacks = 1;
+    [Range(0, 2)] public float TimeBetweenVolleys = 1;
+    [HideInInspector] public WaitForSeconds VollyTimer = new WaitForSeconds(1);
+    [Range(0, 5)] public int NumberOfVolleys = 1;
+    [VTRangeStep(2f, 10f, 2f)] public float BulletsPerVolley = 2;
+    [Range(0, 1f)] public float BulletSpread = 1;
+
+    [HideInInspector] public Transform Target;
     [HideInInspector] public WaitForSeconds AttackTimer = new WaitForSeconds(1);
     [HideInInspector] public bool CanShoot = true;
     public abstract IEnumerator Shoot();
