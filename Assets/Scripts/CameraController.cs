@@ -17,9 +17,8 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         //Mouse Input
-        MouseInput.x += Input.GetAxis("Mouse X") * sensitivity;
-        MouseInput.y -= Input.GetAxis("Mouse Y") * sensitivity;
-        
+        MouseInput.x = Input.GetAxis("Mouse X") * sensitivity;
+        MouseInput.y = Input.GetAxis("Mouse Y") * sensitivity;
         
         Direction = Quaternion.Euler(MouseInput.y, 0, 0);
         MouseInput.y = Mathf.Clamp(MouseInput.y, -lookXLimit, lookXLimit);
@@ -29,6 +28,7 @@ public class CameraController : MonoBehaviour
         transform.parent.RotateAround(RotatePoint.position, RotatePoint.rotation * Vector3.up, MouseInput.x);
         //if(transform.parent.GetComponent<GravityAffected>().Grounded==false)
         //    MouseInput.x = 0;
+               
         gameObject.transform.localRotation = Direction;
     }
 }

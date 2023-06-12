@@ -7,35 +7,30 @@ public class GravityAffected : MonoBehaviour
     public LayerMask WhatIsGround;
 
     [Range(0, 5)] public float GroundedDistance;
-    [HideInInspector] public Transform Planet;
     [HideInInspector] public float AttractionStrength, Distance;
     [HideInInspector] public bool Grounded = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    [HideInInspector] public GravityField CurrentGravityTarget;
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!Planet)
+        if (!CurrentGravityTarget)
             return;
 
+        // Not doing anything with Gravity check, but should keep here if we need later.
         Grounded = CheckIfGrounded(GroundedDistance);
-        if (CheckIfGrounded(50))
-           transform.rotation = Quaternion.FromToRotation(Vector3.up, GetHit(Distance).normal);
-        
-        //succ to the ground
-        if (!Grounded) 
-            transform.GetComponent<Rigidbody>().AddForce((Planet.position - transform.position).normalized * AttractionStrength, ForceMode.Force);
-        else if (Grounded) transform.GetComponent<Rigidbody>().velocity *= 0.9f;
 
-        //this bc planet assigned every frame so cancel 
-        //cancel bc then it can leave the grav field
-        Planet = null;
-        
+        // EDIT: Always pulls to the closest gravity field.  This resolves the issue of spinning out of control and not being oriented to the planet after exiting the gravity zone.
+        // By checking only if it's grounded, we reorient ourselves to the global up direction when out the gravity field range.
+        // If we want to make it so that they no longer orient themselves to planet when out of orbit, then we can set CurrentGravityTarget to null and apply a rotational force to the player to keep rotating randomly.
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, (transform.position - CurrentGravityTarget.transform.position).normalized);
+
+        // EDIT: Always pulls the target towards the planet, even if we aren't grounded
+        transform.GetComponent<Rigidbody>().AddForce((CurrentGravityTarget.transform.position - transform.position).normalized * AttractionStrength, ForceMode.Force);
+
+
+        if (Grounded) transform.GetComponent<Rigidbody>().velocity *= 0.9f;
     }
 
 
@@ -43,20 +38,20 @@ public class GravityAffected : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, transform.rotation * Vector2.down * GroundedDistance);
-        if (!Planet) return;
+        
+        if (!CurrentGravityTarget) return;
 
         Gizmos.color = Color.magenta;
-        Gizmos.DrawRay(transform.position, (Planet.position - transform.position).normalized * Distance);
-       
+        Gizmos.DrawRay(transform.position, (CurrentGravityTarget.transform.position - transform.position).normalized * Distance);
     }
     public bool CheckIfGrounded(float dist)
     {
-        return Physics.Raycast(transform.position,  (Planet.position - transform.position).normalized, dist, WhatIsGround);
+        return Physics.Raycast(transform.position, (CurrentGravityTarget.transform.position - transform.position).normalized, dist, WhatIsGround);
     }
     public RaycastHit GetHit(float dist)
     {
         RaycastHit Hit;
-        Physics.Raycast(transform.position, (Planet.position - transform.position).normalized , out Hit, dist, WhatIsGround);
+        Physics.Raycast(transform.position, (CurrentGravityTarget.transform.position - transform.position).normalized, out Hit, dist, WhatIsGround);
         return Hit;
     }
 }
