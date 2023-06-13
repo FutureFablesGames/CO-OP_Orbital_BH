@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 25)] public float Speed;
     private Rigidbody rb;
     public GameObject mesh;
+    public CameraController camController;
 
     public float JumpForce = 1.0f;
 
@@ -30,11 +31,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 Vec = Vector3.zero;
-        Vec += mesh.transform.rotation * Vector3.right * Input.GetAxisRaw("Horizontal");
-        Vec += mesh.transform.rotation * Vector3.forward * Input.GetAxisRaw("Vertical");
-        rb.AddForce(Vec.normalized* Speed *2);
+        Motion();
+        Jump();
+    }
 
+    private void Motion()
+    {
+        Vector3 Vec = Vector3.zero;
+
+        // Get direction of movement based on whether we're rotating the camera with the mesh or not
+        Quaternion direction = (camController.RotateWithMesh) ?
+            mesh.transform.rotation : camController.cam.transform.rotation;
+
+        // X Axis Movement (Left to Right)
+        Vec += direction * ((camController.RotateWithMesh) ? Vector3.right : Vector3.right) * Input.GetAxisRaw("Horizontal");
+
+        // Z Axis Movement (Forward/Backwards)
+        Vec += direction * ((camController.RotateWithMesh) ? Vector3.forward : Vector3.up) * Input.GetAxisRaw("Vertical");
+
+        // Add Movement Force
+        rb.AddForce(Vec.normalized * Speed * 2);
+    }
+
+    private void Jump()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * JumpForce);
