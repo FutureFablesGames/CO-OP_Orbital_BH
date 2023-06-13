@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (!GetComponent<GravityAffected>().Grounded && Input.GetKeyDown(KeyCode.Space))
+        if (GetComponent<GravityAffected>().Grounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * JumpForce);
         }

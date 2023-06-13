@@ -1849,7 +1849,7 @@ MonoBehaviour:
   cam: {fileID: 8420609714889556368}
   MeshReference: {fileID: 1196325103}
   RotateWithMesh: 0
-  Setting: 0
+  Setting: 4
   TPS_Transform: {fileID: 2125744359}
   FPS_Transform: {fileID: 1940339456}
   ISO_Transform: {fileID: 894288637}
