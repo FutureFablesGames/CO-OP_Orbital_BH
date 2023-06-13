@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     [Range(0,20)] public float sensitivity =10.0f;
     [Range(45, 90)] public float lookXLimit = 45.0f;
     public Transform RotatePoint;
-    private Quaternion Direction;
     public Vector2 MouseInput;
 
     [Header("Camera Settings")]

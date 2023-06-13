@@ -8,7 +8,7 @@ public class GravityAffected : MonoBehaviour
 
     [Range(0, 5)] public float GroundedDistance;
     [HideInInspector] public float AttractionStrength, Distance;
-    [HideInInspector] public bool Grounded = false;
+    public bool Grounded = false;
 
     [HideInInspector] public GravityField CurrentGravityTarget;
 

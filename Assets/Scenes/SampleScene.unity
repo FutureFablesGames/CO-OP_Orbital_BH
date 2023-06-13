@@ -362,6 +362,8 @@ MonoBehaviour:
   mesh: {fileID: 0}
   camController: {fileID: 0}
   JumpForce: 1
+  f_AirFrictionForce: 1
+  MaxSpeed: 10
 --- !u!54 &686737919
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1765,10 +1767,12 @@ MonoBehaviour:
   CurrentResources: 0
   MaxResources: 500
   PromptDisplay: {fileID: 307401285}
-  Speed: 14.2
+  Speed: 25
   mesh: {fileID: 1196325103}
   camController: {fileID: 8420609713627806714}
   JumpForce: 500
+  f_AirFrictionForce: 1
+  MaxSpeed: 10
 --- !u!114 &6027228892800166187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,7 +1849,7 @@ MonoBehaviour:
   cam: {fileID: 8420609714889556368}
   MeshReference: {fileID: 1196325103}
   RotateWithMesh: 0
-  Setting: 2
+  Setting: 0
   TPS_Transform: {fileID: 2125744359}
   FPS_Transform: {fileID: 1940339456}
   ISO_Transform: {fileID: 894288637}
