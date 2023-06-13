@@ -356,7 +356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentResources: 0
-  MaxResources: 500
   PromptDisplay: {fileID: 0}
   Speed: 12
   mesh: {fileID: 0}
@@ -1765,7 +1764,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentResources: 0
-  MaxResources: 500
   PromptDisplay: {fileID: 307401285}
   Speed: 25
   mesh: {fileID: 1196325103}
@@ -1866,7 +1864,7 @@ GameObject:
   - component: {fileID: 8420609714889556368}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

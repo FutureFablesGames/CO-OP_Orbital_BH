@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Resources")]
     public float CurrentResources;
-    public float MaxResources = 500.0f;
+    //public float MaxResources = 500.0f;
 
     [Header("UI")]
     public TMP_Text PromptDisplay = null;
