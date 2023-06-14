@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GravityAffected : MonoBehaviour
 {
     public LayerMask WhatIsGround;
@@ -12,7 +13,6 @@ public class GravityAffected : MonoBehaviour
 
     [HideInInspector] public GravityField CurrentGravityTarget;
 
-    // Update is called once per frame
     void Update()
     {
         if (!CurrentGravityTarget)

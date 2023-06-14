@@ -4,12 +4,8 @@ using UnityEngine;
 
     public class FanBullet : BulletEmitter
     {
-    [Range(0, 2)] public float TimeBetweenVolleys = 1;
-    [HideInInspector] public WaitForSeconds VollyTimer = new WaitForSeconds(1);
-    [Range(0, 5)] public int NumberOfVolleys = 1;
-    [VTRangeStep(2f, 10f, 2f)] public float BulletsPerVolley;
-    [Range(0,1f)] public float BulletSpread = 1;
-    public List<Vector3> ArcTargets,PrelimTargets,Targets;
+   
+    [HideInInspector] public List<Vector3> ArcTargets,PrelimTargets,Targets;
     private Vector3 Difference;
     public override void Awake()
     {
