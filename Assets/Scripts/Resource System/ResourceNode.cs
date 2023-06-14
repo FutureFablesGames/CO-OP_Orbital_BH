@@ -13,6 +13,9 @@ public class ResourceNode : Interactable
 
     public override void Interact(PlayerController pc)
     {
+        /* -- Code is responsible for limiting how many resources the player can take. 
+         * -- Removing it for testing and possible direction of not restricting player with a weight limit
+        
         // Determine how much space is available
         float available = pc.MaxResources - pc.CurrentResources;
         
@@ -26,10 +29,11 @@ public class ResourceNode : Interactable
             result = available;
             Amount -= available;
         }
+        */
 
         // Give resources to the player
-        pc.CurrentResources += result;
-        Amount -= result;
+        pc.CurrentResources += Amount;
+        Amount = 0;
        
         // Check if there are resources left
         if (Amount <= 0)

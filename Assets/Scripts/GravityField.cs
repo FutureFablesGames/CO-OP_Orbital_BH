@@ -8,12 +8,7 @@ public class GravityField : MonoBehaviour
     private float BasePlanetCircumference;
     public LayerMask WhatIsGravityAffected;
     public Collider[] colls;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-       
-    }
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -23,8 +18,8 @@ public class GravityField : MonoBehaviour
         {
             if (coll.GetComponent<GravityAffected>() != null)
             {
-                coll.transform.GetComponent<GravityAffected>().AttractionStrength = GravityStrength;
-                coll.transform.GetComponent<GravityAffected>().Planet = transform;
+                coll.transform.GetComponent<GravityAffected>().CurrentGravityTarget = this;
+                coll.transform.GetComponent<GravityAffected>().AttractionStrength = GravityStrength;                
                 coll.transform.GetComponent<GravityAffected>().Distance = GravityRange;
             }            
         }
