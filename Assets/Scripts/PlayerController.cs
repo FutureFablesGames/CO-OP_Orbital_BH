@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(GravityAffected))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [Header("Resources")]
     public float CurrentResources;
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //check if we own this current player, and return if not so the other code doesn't run.
+        //this means for networking that only your own player will move when you move
+        if (!IsOwner) return;
         Vector3 Vec = Vector3.zero;
         Vec += transform.rotation * Vector3.right * Input.GetAxisRaw("Horizontal");
         Vec += transform.rotation * Vector3.forward * Input.GetAxisRaw("Vertical");
