@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Manager.Game.State != GameState.Playing) return;
+
         Motion();
         Jump();
 

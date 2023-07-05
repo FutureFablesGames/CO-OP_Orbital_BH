@@ -25,6 +25,8 @@ public class ResourceDepot : Interactable
         Amount += amount;
         pc.CurrentResources -= amount;
 
+        Manager.UI.UpdateResourcesDisplay(Amount.ToString("F2"));
+        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
         ValueDisplay.text = Amount.ToString("F2");
     }
 
@@ -33,6 +35,8 @@ public class ResourceDepot : Interactable
         Amount -= amount;
         pc.CurrentResources += amount;
 
+        Manager.UI.UpdateResourcesDisplay(Amount.ToString("F2"));
+        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
         ValueDisplay.text = Amount.ToString("F2");
     }
 }

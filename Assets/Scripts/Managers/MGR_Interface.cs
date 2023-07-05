@@ -2,16 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+using TMPro;
+
 public class MGR_Interface : MonoBehaviour
 {
-    private static MGR_Interface instance;
-    private static bool Initialized = false;
+    [Header("Pregame")]
+    public TMP_Text CountdownDisplay;
 
-    public static MGR_Interface Initialize()
+    [Header("Game UI")]
+    public TMP_Text InventoryDisplay;
+    public TMP_Text ResourcesDisplay;
+    public TMP_Text TimeDisplay;
+   
+    private void Awake()
     {
-        if (Initialized) Debug.LogWarning("WARNING: UI Manager already exists.  Please use Manager.UI instead.");
+        if (Manager.UI != null)
+        {
+            Debug.LogWarning("Replacing previous UI Manager");
+        }
 
-        if (instance == null) instance = new MGR_Interface();
-        return instance;
+        Manager.UI = this;
+    }
+
+    public void SetCountdown(string text)
+    {
+        if (!CountdownDisplay.enabled) CountdownDisplay.enabled = true;
+        CountdownDisplay.text = text;
+    }
+
+    public void HideCountdown()
+    {
+        CountdownDisplay.enabled = false;
+    }
+
+    public void UpdateResourcesDisplay(string text)
+    {
+        ResourcesDisplay.text = "Resources: " + text;
+    }
+
+    public void UpdateTimeDisplay(float time)
+    {
+        TimeDisplay.text = "Time: " + time.ToString("F2");
+    }
+
+    public void UpdateInventoryDisplay(string text)
+    {
+        InventoryDisplay.text = "Inventory: " + text;
     }
 }

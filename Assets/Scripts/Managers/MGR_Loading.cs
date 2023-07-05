@@ -47,7 +47,7 @@ public class MGR_Loading : MonoBehaviour
     /* NOTE: I'm using the WaitForSeconds delay to simulate the delay of loading large files or connecting to a server.  This should be removed later */
     private IEnumerator Initialize()
     {   
-        int numManagers = 8;
+        int numManagers = 7;
 
         if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
@@ -73,15 +73,7 @@ public class MGR_Loading : MonoBehaviour
         if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Sound Manager"); yield break; }
         else load_progress += 1f / numManagers;
 
-        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
-
-        // Interface
-        SetStatus("Initializing Interface");
-        Manager.UI = MGR_Interface.Initialize();
-        if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Interface Manager"); yield break; }
-        else load_progress += 1f / numManagers;
-
-        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));        
 
         // Input
         SetStatus("Initializing Input Manager");

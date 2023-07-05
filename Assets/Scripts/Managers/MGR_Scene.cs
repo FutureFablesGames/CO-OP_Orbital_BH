@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public enum Scenes
 {
-    menu,
     loading,
+    menu,    
     tutorial,
     game,
     sandbox,    

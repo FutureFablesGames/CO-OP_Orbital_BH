@@ -34,7 +34,10 @@ public class ResourceNode : Interactable
         // Give resources to the player
         pc.CurrentResources += Amount;
         Amount = 0;
-       
+        
+        // Update the Player Inventory Display
+        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
+
         // Check if there are resources left
         if (Amount <= 0)
         {
