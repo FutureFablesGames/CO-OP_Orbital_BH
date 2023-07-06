@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(GravityAffected))]
+[RequireComponent(typeof(GravityBody))]
 public class Bullet : MonoBehaviour
 {
     [HideInInspector] public Vector3 Target;
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-       if(GetComponent<GravityAffected>().Grounded)
+       if(GetComponent<GravityBody>().Grounded)
             RB.AddForce(transform.rotation*Target*Speed);
     }
     private void OnDrawGizmosSelected()

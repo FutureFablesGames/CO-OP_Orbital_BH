@@ -5,9 +5,21 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GravityAffected))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Components")]
+    public GameObject mesh;
+    public CameraController camController;
+    private GravityBody gravity;
+    private Rigidbody rb;
+
+    [Header("Motion")]
+    public float f_MoveSpeed = 10f;
+    [Range(0, 25)] public float f_MaxSpeed = 15.0f;
+    public float f_JumpForce = 500.0f;
+    private Vector3 v_MoveDir;
+
+
     [Header("Resources")]
     public float CurrentResources;
     //public float MaxResources = 500.0f;
@@ -15,75 +27,50 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public TMP_Text PromptDisplay = null;
 
-    [Header("Other")]
-    [Range(0, 25)] public float Speed;
-    private Rigidbody rb;
-    public GameObject mesh;
-    public CameraController camController;
-
-    public float JumpForce = 1.0f;
-    public float f_AirFrictionForce = 100.0f;
-    [Range(0, 25)] public float MaxSpeed = 10.0f;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        gravity = GetComponent<GravityBody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Manager.Game.State != GameState.Playing) return;
 
         Motion();
-        Jump();
-
         SpeedLimiter();
+        Jump();
     }
 
-    private void SpeedLimiter()
-    {        
-        // TODO: Fix this speed limiter so that it doesn't account velocity towards the planet.  We might have to break up the velocity into two parts before assembling it as a final velocity that we set rb.velocity to.
-        // This way we can manipulate velocity on the horizontal plane separately from the velocity on the vertical plane. We did something like this in Sea Drive.
-        if (rb.velocity.magnitude > MaxSpeed)
-        {           
-            // Get the direction of the velocity
-            Vector3 velocity = rb.velocity;
-
-            // Get the inverse of the direction of velocity
-            Vector3 inverse = -velocity;
-
-            // Calculate how fast over you're going
-            float excess = Mathf.Abs(MaxSpeed - rb.velocity.magnitude);
-
-            // Apply a force in opposite direction proportional to the amount of excess speed.
-            rb.AddForce(inverse * excess);
-        }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + v_MoveDir * f_MoveSpeed * Time.fixedDeltaTime);
     }
 
     private void Motion()
     {
-        Vector3 Vec = Vector3.zero;
+        Vector3 forward = mesh.transform.forward * Input.GetAxisRaw("Vertical");
+        Vector3 right = mesh.transform.right * Input.GetAxisRaw("Horizontal");
 
-        // Get direction of movement based on whether we're rotating the camera with the mesh or not
-        Quaternion direction = (camController.RotateWithMesh) ?
-            mesh.transform.rotation : camController.cam.transform.rotation;
-
-        // X Axis Movement (Left to Right)
-        Vec += direction * ((camController.RotateWithMesh) ? Vector3.right : Vector3.right) * Input.GetAxisRaw("Horizontal");
-
-        // Z Axis Movement (Forward/Backwards)
-        Vec += direction * ((camController.RotateWithMesh) ? Vector3.forward : Vector3.up) * Input.GetAxisRaw("Vertical");
-
-        // Add Movement Force
-        rb.AddForce(Vec.normalized * Speed * 2);
+        v_MoveDir = forward + right;
+        
+       
     }
 
     private void Jump()
     {
-        if (GetComponent<GravityAffected>().Grounded && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(transform.up * JumpForce);
+            Vector3 gravityUp = (transform.position - gravity.attractor.transform.position).normalized;            
+            GetComponent<Rigidbody>().AddForce(gravityUp * f_JumpForce);
+        }
+    }
+
+    private void SpeedLimiter()
+    {
+        if (rb.velocity.magnitude > f_MaxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * f_MaxSpeed;
         }
     }
 
@@ -91,18 +78,19 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Interactable")
         {
-            if (!PromptDisplay.enabled) {
+            if (!PromptDisplay.enabled)
+            {
                 PromptDisplay.text = "'E' to Interact";
                 PromptDisplay.enabled = true;
             }
-            
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 other.GetComponent<Interactable>().Interact(this);
                 PromptDisplay.text = "";
                 PromptDisplay.enabled = false;
             }
-            
+
         }
     }
 
