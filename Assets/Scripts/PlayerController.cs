@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float f_JumpForce = 500.0f;
     private Vector3 v_MoveDir;
 
+    [Header("Handler")]
+    AnimationHandler animationHandler;
 
     [Header("Resources")]
     public float CurrentResources;
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         gravity = GetComponent<GravityBody>();
+
+        animationHandler = GetComponent<AnimationHandler>();
+        animationHandler.Initialize(this, animationHandler.animator);
     }
 
     private void Update()
@@ -40,10 +45,15 @@ public class PlayerController : MonoBehaviour
         Motion();
         SpeedLimiter();
         Jump();
+        Attack();
     }
 
     private void FixedUpdate()
     {
+        animationHandler.currentState.Horizontal = Input.GetAxisRaw("Horizontal");
+        animationHandler.currentState.Vertical = Input.GetAxisRaw("Vertical");
+        animationHandler.currentState.Grounded = gravity.Grounded;
+
         rb.MovePosition(rb.position + v_MoveDir * f_MoveSpeed * Time.fixedDeltaTime);
     }
 
@@ -62,7 +72,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Vector3 gravityUp = (transform.position - gravity.attractor.transform.position).normalized;            
-            GetComponent<Rigidbody>().AddForce(gravityUp * f_JumpForce);
+            rb.AddForce(gravityUp * f_JumpForce);
+            animationHandler.animator.SetTrigger("Jump");
+        }
+    }
+
+    private void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            animationHandler.animator.SetTrigger("Swing");
         }
     }
 
