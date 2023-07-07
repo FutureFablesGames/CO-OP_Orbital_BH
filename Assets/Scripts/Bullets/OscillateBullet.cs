@@ -9,9 +9,10 @@ public class OscillateBullet : BulletEmitter
     [HideInInspector] public WaitForSeconds ShotTimer = new WaitForSeconds(1);
     private Vector3 Difference;
     [Range(0, 2)] public float TimeBetweenShots = 1;
-    
+
     [Header("BulletVolley Specifics" + "\n")]
-    public bool UseMiddleShot, Alternate;
+    public bool UseMiddleShot;
+    public bool Alternate;
     
     
    

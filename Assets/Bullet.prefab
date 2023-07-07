@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3384163319407157685}
   - component: {fileID: 3848739037806943351}
   - component: {fileID: 8426865437469973589}
-  - component: {fileID: -8056641906001595540}
+  - component: {fileID: 7669240535501281155}
   m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
@@ -130,8 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {x: 0, y: 0, z: 0}
   RB: {fileID: 0}
-  Speed: 26.2
---- !u!114 &-8056641906001595540
+  Speed: 5.3
+--- !u!114 &7669240535501281155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,14 +140,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8179267936944871428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a09c4f333cb434c8a022b78251156d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e5193552e2ac29468677b89f2096ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attractor: {fileID: 0}
+  Up: {x: 0, y: 0, z: 0}
+  gravityMultiplier: 1
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  GroundedDistance: 0.6
-  Planet: {fileID: 0}
-  AttractionStrength: 0
-  Distance: 0
+  f_GroundedDistance: 1.1
   Grounded: 0

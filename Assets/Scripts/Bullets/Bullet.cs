@@ -12,12 +12,13 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-       RB = GetComponent<Rigidbody>(); 
+       RB = GetComponent<Rigidbody>();
+        GetComponent<GravityBody>().attractor = FindObjectOfType<GravityAttractor>();
     }
     void Update()
     {
-       if(GetComponent<GravityBody>().Grounded)
-            RB.AddForce(transform.rotation*Target*Speed);
+        if (GetComponent<GravityBody>().Grounded)
+            RB.velocity = (transform.rotation*Target*Speed);
     }
     private void OnDrawGizmosSelected()
     {
