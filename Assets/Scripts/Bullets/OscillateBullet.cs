@@ -7,7 +7,7 @@ public class OscillateBullet : BulletEmitter
     [HideInInspector] public List<Vector3> ArcTargets, PrelimTargets;
     private int VolleyDirection = 1;
     [HideInInspector] public WaitForSeconds ShotTimer = new WaitForSeconds(1);
-    private Vector3 Difference;
+    [HideInInspector] public Vector3 Difference;
     [Range(0, 2)] public float TimeBetweenShots = 1;
 
     [Header("BulletVolley Specifics" + "\n")]
@@ -96,7 +96,7 @@ public class OscillateBullet : BulletEmitter
     {
 
         RaycastHit hit;
-        Physics.Raycast(transform.position, (Target.position - transform.position).normalized, out hit, 1000f, WhatIsPlayer);
+        Physics.Raycast(transform.position, (Target.position - transform.position).normalized, out hit, 1000f, WhatIsTarget);
         Difference = Quaternion.AngleAxis(90, Target.up) * hit.normal.normalized;
         if (Target == null)
             return;

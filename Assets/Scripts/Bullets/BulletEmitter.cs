@@ -9,7 +9,7 @@ public enum TypeOfEmitter
 
 public abstract class BulletEmitter : MonoBehaviour
 {   
-    public LayerMask WhatIsPlayer,WhatIsGround;
+    public LayerMask WhatIsTarget,WhatIsGround;
     public GameObject BulletPrefab;
     [Range(0, 15)] public float SightRange = 1;
 
@@ -32,7 +32,7 @@ public abstract class BulletEmitter : MonoBehaviour
     }
     public virtual void Update()
     {
-        if (Physics.CheckSphere(transform.position, SightRange, WhatIsPlayer))
+        if (Physics.CheckSphere(transform.position, SightRange, WhatIsTarget))
         {
             Target = CalculateTarget();
             GetSpreadPattern();

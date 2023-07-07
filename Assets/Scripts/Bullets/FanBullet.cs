@@ -6,7 +6,7 @@ using UnityEngine;
     {
    
     [HideInInspector] public List<Vector3> ArcTargets,PrelimTargets,Targets;
-    private Vector3 Difference;
+    [HideInInspector] public Vector3 Difference;
     public override void Awake()
     {
         base.Awake();
@@ -52,7 +52,7 @@ using UnityEngine;
     public override void GetSpreadPattern()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, (Target.position - transform.position).normalized, out hit, 1000f, WhatIsPlayer);
+        Physics.Raycast(transform.position, (Target.position - transform.position).normalized, out hit, 1000f, WhatIsTarget);
         Difference = Quaternion.AngleAxis(90, Target.up) * hit.normal.normalized;
         if (Target == null)
             return;
