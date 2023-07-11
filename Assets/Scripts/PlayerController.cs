@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 25)] public float f_MaxSpeed = 15.0f;
     public float f_JumpForce = 500.0f;
     private Vector3 v_MoveDir;
+    private bool CanJump = true;
 
     [Header("Handler")]
     AnimationHandler animationHandler;
@@ -69,11 +70,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && gravity.Grounded && CanJump)
         {
             Vector3 gravityUp = (transform.position - gravity.attractor.transform.position).normalized;            
             rb.AddForce(gravityUp * f_JumpForce);
             animationHandler.animator.SetTrigger("Jump");
+            StartCoroutine(DelayJumpAllowance());
         }
     }
 
@@ -91,6 +93,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = rb.velocity.normalized * f_MaxSpeed;
         }
+    }
+
+    private IEnumerator DelayJumpAllowance()
+    {
+        CanJump = false;
+        yield return new WaitForSeconds(0.5f);
+        CanJump = true;
     }
 
     private void OnTriggerStay(Collider other)
