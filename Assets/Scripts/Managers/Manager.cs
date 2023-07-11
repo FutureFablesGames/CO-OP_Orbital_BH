@@ -16,7 +16,7 @@ public static class Manager
     public static MGR_Loading Loader;
     public static MGR_Input Input;
     public static MGR_Network Network;
-    public static MGR_Sound Sound;
+    public static MGR_Audio Audio;
     public static MGR_Asset Assets;    
     public static MGR_Settings Settings;
     public static MGR_Interface UI;

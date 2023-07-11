@@ -12,6 +12,9 @@ public class MGR_Loading : MonoBehaviour
     private float load_progress = 0.0f;
     private bool scene_changing = false;
 
+    [Header("Prefabs")]
+    public GameObject prefab_AudioManager;
+
     [Header("Interface")]
     public TMP_Text StatusDisplay;
     public TMP_Text VersionDisplay;
@@ -47,7 +50,7 @@ public class MGR_Loading : MonoBehaviour
     /* NOTE: I'm using the WaitForSeconds delay to simulate the delay of loading large files or connecting to a server.  This should be removed later */
     private IEnumerator Initialize()
     {   
-        int numManagers = 7;
+        int numManagers = 4;
 
         if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
@@ -67,37 +70,37 @@ public class MGR_Loading : MonoBehaviour
 
         if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
-        // Sound
-        SetStatus("Initializing Sound Manager");
-        Manager.Sound = MGR_Sound.Initialize();
-        if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Sound Manager"); yield break; }
+        // Audio
+        SetStatus("Initializing Audio Manager");
+        Manager.Audio = Instantiate(prefab_AudioManager, Vector3.zero, Quaternion.identity).GetComponent<MGR_Audio>();
+        if (Manager.Audio == null) { Debug.LogError("Failed to Initialize Sound Manager"); yield break; }
         else load_progress += 1f / numManagers;
 
         if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));        
 
-        // Input
-        SetStatus("Initializing Input Manager");
-        Manager.Input = MGR_Input.Initialize();
-        if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Input Manager"); yield break; }
-        else load_progress += 1f / numManagers;
+        //// Input
+        //SetStatus("Initializing Input Manager");
+        //Manager.Input = MGR_Input.Initialize();
+        //if (Manager.Input == null) { Debug.LogError("Failed to Initialize Input Manager"); yield break; }
+        //else load_progress += 1f / numManagers;
 
-        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+        //if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
-        // Assets
-        SetStatus("Initializing Assets");
-        Manager.Assets = MGR_Asset.Initialize();
-        if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Asset Manager"); yield break; }
-        else load_progress += 1f / numManagers;
+        //// Assets
+        //SetStatus("Initializing Assets");
+        //Manager.Assets = MGR_Asset.Initialize();
+        //if (Manager.Assets == null) { Debug.LogError("Failed to Initialize Asset Manager"); yield break; }
+        //else load_progress += 1f / numManagers;
 
-        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+        //if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
-        // Network
-        SetStatus("Initializing Network Manager");
-        Manager.Network = MGR_Network.Initialize();
-        if (Manager.Scene == null) { Debug.LogError("Failed to Initialize Network Manager"); yield break; }
-        else load_progress += 1f / numManagers;
+        //// Network
+        //SetStatus("Initializing Network Manager");
+        //Manager.Network = MGR_Network.Initialize();
+        //if (Manager.Network == null) { Debug.LogError("Failed to Initialize Network Manager"); yield break; }
+        //else load_progress += 1f / numManagers;
 
-        if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+        //if (!DEBUG_SkipDelaySequence) yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
 
         // Load Manager
         SetStatus("Finalizing Game Loader");

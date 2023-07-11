@@ -39,6 +39,7 @@ public class MainMenu : MonoBehaviour
     private void OnMultiplayerPress()
     {
         Debug.Log("Multiplayer");
+        Manager.Audio.PlayInstance(SoundFile.Test);
     }
 
     /* Sandbox mode should be like free-play or practice mode where you can select the map you want to play, the weather conditions, hazards, etc.
