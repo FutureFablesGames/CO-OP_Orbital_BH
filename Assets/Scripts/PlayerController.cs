@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Components")]
-    public PlayerInput input;
     public GameObject mesh;    
     private GravityBody gravity;
     private Rigidbody rb;
@@ -41,10 +40,7 @@ public class PlayerController : MonoBehaviour
         gravity = GetComponent<GravityBody>();
 
         animationHandler = GetComponent<AnimationHandler>();
-        animationHandler.Initialize(this, animationHandler.animator);     
-        
-        input = GetComponent<PlayerInput>();
-                 
+        animationHandler.Initialize(this, animationHandler.animator);             
     }
 
     private void OnEnable()

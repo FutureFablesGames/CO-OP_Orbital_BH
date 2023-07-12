@@ -2268,7 +2268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b7835b412846b42b021267ea67d925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 0}
   mesh: {fileID: 764467890}
   CameraController: {fileID: 0}
   f_MoveSpeed: 5
@@ -2420,7 +2419,6 @@ GameObject:
   - component: {fileID: 8420609714742116474}
   - component: {fileID: 8420609714742116475}
   - component: {fileID: 8420609714742116476}
-  - component: {fileID: 8420609714742116477}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2497,60 +2495,6 @@ MonoBehaviour:
   PrelimTargets: []
   Targets: []
   Difference: {x: 0, y: 0, z: 0}
---- !u!114 &8420609714742116477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8420609714742116473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 48b6a4c0e79c1c4499b19e8b08194633, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: df078e11-22ae-451b-b065-94074338eaaa
-    m_ActionName: Game/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 329b63be-8102-47f3-bf52-15a3cc645351
-    m_ActionName: Game/Attack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3d6d5c83-e964-462e-88c4-8a5dc78d86da
-    m_ActionName: Game/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 71255cc2-7893-4be5-a1f8-27823eb1f7a5
-    m_ActionName: Game/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5e4e1daf-8c3c-436f-a1bc-ced30816da45
-    m_ActionName: Game/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3db155b1-5301-4092-95f2-33a75457e4ea
-    m_ActionName: Menu/New action
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Game
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!20 &8420609714889556368
 Camera:
   m_ObjectHideFlags: 0
