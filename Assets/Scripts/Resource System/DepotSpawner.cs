@@ -21,12 +21,12 @@ public class DepotSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            SpawnPoints.Clear();
-            SpawnPoints = new List<Vector3>();
-            SpawnDepots();
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //    SpawnPoints.Clear();
+        //    SpawnPoints = new List<Vector3>();
+        //    SpawnDepots();
+        //}
     }
 
     private void SpawnDepots()

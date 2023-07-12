@@ -8,10 +8,10 @@ public class PlayerFanBullet : FanBullet
     {
         Target = transform.GetComponentInChildren<PlayerTarget>().Target;
         GetSpreadPattern();
-        if (Input.GetKeyDown(KeyCode.Mouse1)&& CanShoot)
-        {
-            StartCoroutine(Shoot());
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse1)&& CanShoot)
+        //{
+        //    StartCoroutine(Shoot());
+        //}
     }
 
     public override void GetSpreadPattern()

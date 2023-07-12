@@ -5,8 +5,8 @@ using UnityEngine;
 public enum CameraSetting { ThirdPerson, Isometric, Topdown, FirstPerson, IsoWithRotation, TopWithRotation }
 
 public class CameraController : MonoBehaviour
-{
-   
+{   
+    // Variables
     [Range(0,20)] public float sensitivity =10.0f;
     [Range(45, 90)] public float lookXLimit = 45.0f;
     public Transform RotatePoint;
@@ -80,12 +80,10 @@ public class CameraController : MonoBehaviour
 
     private void UpdateCamera()
     {
-        // Mouse Input
-        MouseInput.x = Input.GetAxis("Mouse X") * sensitivity;
-        MouseInput.y = Input.GetAxis("Mouse Y") * sensitivity;
+        // Mouse Input - Technically can just be made into "MouseInput = Manager.Input.CameraInput", but this way we can adjust separate sensitivities
+        MouseInput.x = Manager.Input.CameraInput.x * sensitivity;
+        MouseInput.y = Manager.Input.CameraInput.y * sensitivity;
 
-        
-        
         // Horizontal Rotations (YAW)
         float xRotationRate = MouseInput.x * sensitivity * Time.deltaTime;
         MeshReference.transform.RotateAround(RotatePoint.position, RotatePoint.rotation * Vector3.up, xRotationRate);

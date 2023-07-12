@@ -23,10 +23,10 @@ public class ResourceSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Begin();
-        }
+        //if (Input.GetKeyDown(KeyCode.F2))
+        //{
+        //    Begin();
+        //}
     }
 
     public void Begin()
