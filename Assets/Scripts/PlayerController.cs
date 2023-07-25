@@ -34,13 +34,21 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public TMP_Text PromptDisplay = null;
 
+    // TEMP: Weapon Inventory
+    public Weapon currentWeapon = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         gravity = GetComponent<GravityBody>();
 
         animationHandler = GetComponent<AnimationHandler>();
-        animationHandler.Initialize(this, animationHandler.animator);             
+        animationHandler.Initialize(this, animationHandler.animator);            
+
+        if (currentWeapon != null)
+        {
+            currentWeapon.Owner = this;
+        }
     }
 
     private void OnEnable()
@@ -48,7 +56,8 @@ public class PlayerController : MonoBehaviour
         if (Manager.Input != null)
         {
             Manager.Input.JumpCallback += Jump;
-            Manager.Input.AttackCallback += Attack;
+            Manager.Input.PrimaryFireCallback += PrimaryFire;
+            Manager.Input.SecondaryFireCallback += SecondaryFire;
             Manager.Input.InteractCallback += Interact;
             Manager.Input.SetEnable(InputMap.Game, true);
         }
@@ -60,16 +69,15 @@ public class PlayerController : MonoBehaviour
         if (Manager.Input != null)
         {
             Manager.Input.JumpCallback -= Jump;
-            Manager.Input.AttackCallback -= Attack;
+            Manager.Input.PrimaryFireCallback -= PrimaryFire;
+            Manager.Input.SecondaryFireCallback -= SecondaryFire;
             Manager.Input.InteractCallback -= Interact;
             Manager.Input.SetEnable(InputMap.Game, false);
         }        
     }
 
     private void Update()
-    {        
-        //Debug.Log(Manager.Input.MotionInput);
-
+    {                
         if (Manager.Game.State != GameState.Playing) return;
 
         HandleMotion();      
@@ -121,10 +129,17 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void Attack()
+    public void PrimaryFire()
     {
         // Trigger Animation -- Currently only works with pickaxe.
         animationHandler.animator.SetTrigger("Swing");
+        
+        currentWeapon.PrimaryFire();
+    }
+
+    public void SecondaryFire()
+    {
+        currentWeapon.SecondaryFire();
     }
 
     public void Interact()
