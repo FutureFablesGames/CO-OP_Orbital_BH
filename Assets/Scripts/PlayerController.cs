@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {        
-        Debug.Log(Manager.Input.MotionInput);
+        //Debug.Log(Manager.Input.MotionInput);
 
         if (Manager.Game.State != GameState.Playing) return;
 
