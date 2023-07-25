@@ -37,9 +37,18 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""PrimaryFire"",
                     ""type"": ""Value"",
                     ""id"": ""329b63be-8102-47f3-bf52-15a3cc645351"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SecondaryFire"",
+                    ""type"": ""Value"",
+                    ""id"": ""18ac77bd-0bed-43dc-8961-0d070ee59937"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -145,7 +154,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""PrimaryFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -192,6 +201,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""Item1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39d9915f-0145-42b6-bfd9-bc00182f2421"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -229,7 +249,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_Attack = m_Game.FindAction("Attack", throwIfNotFound: true);
+        m_Game_PrimaryFire = m_Game.FindAction("PrimaryFire", throwIfNotFound: true);
+        m_Game_SecondaryFire = m_Game.FindAction("SecondaryFire", throwIfNotFound: true);
         m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
         m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
@@ -299,7 +320,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Game;
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
     private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_Attack;
+    private readonly InputAction m_Game_PrimaryFire;
+    private readonly InputAction m_Game_SecondaryFire;
     private readonly InputAction m_Game_Jump;
     private readonly InputAction m_Game_Look;
     private readonly InputAction m_Game_Interact;
@@ -309,7 +331,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         private @ActionMap m_Wrapper;
         public GameActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Game_Move;
-        public InputAction @Attack => m_Wrapper.m_Game_Attack;
+        public InputAction @PrimaryFire => m_Wrapper.m_Game_PrimaryFire;
+        public InputAction @SecondaryFire => m_Wrapper.m_Game_SecondaryFire;
         public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputAction @Look => m_Wrapper.m_Game_Look;
         public InputAction @Interact => m_Wrapper.m_Game_Interact;
@@ -326,9 +349,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @PrimaryFire.started += instance.OnPrimaryFire;
+            @PrimaryFire.performed += instance.OnPrimaryFire;
+            @PrimaryFire.canceled += instance.OnPrimaryFire;
+            @SecondaryFire.started += instance.OnSecondaryFire;
+            @SecondaryFire.performed += instance.OnSecondaryFire;
+            @SecondaryFire.canceled += instance.OnSecondaryFire;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -348,9 +374,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @PrimaryFire.started -= instance.OnPrimaryFire;
+            @PrimaryFire.performed -= instance.OnPrimaryFire;
+            @PrimaryFire.canceled -= instance.OnPrimaryFire;
+            @SecondaryFire.started -= instance.OnSecondaryFire;
+            @SecondaryFire.performed -= instance.OnSecondaryFire;
+            @SecondaryFire.canceled -= instance.OnSecondaryFire;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -429,7 +458,8 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     public interface IGameActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnPrimaryFire(InputAction.CallbackContext context);
+        void OnSecondaryFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

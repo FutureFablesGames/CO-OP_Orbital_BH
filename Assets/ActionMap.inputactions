@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "PrimaryFire",
                     "type": "Value",
                     "id": "329b63be-8102-47f3-bf52-15a3cc645351",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryFire",
+                    "type": "Value",
+                    "id": "18ac77bd-0bed-43dc-8961-0d070ee59937",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -123,7 +132,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "PrimaryFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -168,6 +177,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Item1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "39d9915f-0145-42b6-bfd9-bc00182f2421",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

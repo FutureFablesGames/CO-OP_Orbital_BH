@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (Manager.Input != null)
         {
             Manager.Input.JumpCallback += Jump;
-            Manager.Input.AttackCallback += Attack;
+            Manager.Input.PrimaryFireCallback += Attack;
             Manager.Input.InteractCallback += Interact;
             Manager.Input.SetEnable(InputMap.Game, true);
         }
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         if (Manager.Input != null)
         {
             Manager.Input.JumpCallback -= Jump;
-            Manager.Input.AttackCallback -= Attack;
+            Manager.Input.PrimaryFireCallback -= Attack;
             Manager.Input.InteractCallback -= Interact;
             Manager.Input.SetEnable(InputMap.Game, false);
         }        
