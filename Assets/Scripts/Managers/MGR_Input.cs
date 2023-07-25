@@ -27,6 +27,7 @@ public class MGR_Input
     public InputDelegate LookCallback;
     public InputDelegate AttackCallback;
     public InputDelegate InteractCallback;
+    public InputDelegate Item1Callback;
 
     // ----------------------------------------------------------------------------
     // Initialization
@@ -56,6 +57,7 @@ public class MGR_Input
         result.Controls.FindAction("Jump").performed += result.JumpCtx;
         result.Controls.FindAction("Attack").performed += result.AttackCtx;
         result.Controls.FindAction("Interact").performed += result.InteractCtx;
+        result.Controls.FindAction("Item1").performed += result.Item1Ctx;
       
         return result;
     }
@@ -120,6 +122,12 @@ public class MGR_Input
         if (!ctx.performed) return;
         
         InteractCallback?.Invoke();
+    }
+    public void Item1Ctx(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        
+        Item1Callback?.Invoke();
     }
 
 }

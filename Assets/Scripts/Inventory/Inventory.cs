@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,26 +29,43 @@ public class Inventory : MonoBehaviour
     {
         //currentAmount = currentItem.usableCount;
     }
+    private void OnEnable()
+    {
+        if (Manager.Input != null)
+        {
+            Manager.Input.Item1Callback += UseItem1;
+           
+        }
+        
+    }
 
     // Update is called once per frame
-    void Update()
+    private void UseItem1()
     {
+        //Debug.Log("Current items: " + currentItems.Count);
+
         //for using the item
         //go through current items?
-        for (int i=0; i < currentItems.Count; i++)
+        //for (int i=0; i < currentItems.Count; i++)
+        if (currentItems.Count >=1)
         {   
-            
+            //for now only the 1st item
             //check that we're pressing the right key and that we have enough of that item
-            if (Input.GetKeyDown(currentItems[i].key) && currentItems[i].uses < currentItems[i].usableCount)
+            if (currentItems[0].uses < currentItems[0].usableCount)
             {
-                currentItems[i].Activate(gameObject); //activate the effect when the key is pressed
+                currentItems[0].Activate(gameObject); //activate the effect when the key is pressed
 
-                if (currentItems[i].uses >= currentItems[i].usableCount) //we used it up
+                if (currentItems[0].uses >= currentItems[0].usableCount) //we used it up
                 {
                     //remove the item
                     Debug.Log("Used up the item");
                     currentSlots -=1;
-                    currentItems.Remove(currentItems[i]);
+
+                    //reset uses for next item
+                    currentItems[0].uses = 0;
+
+                    currentItems.Remove(currentItems[0]);
+                    
                     
 
                 }

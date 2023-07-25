@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a499f1a9f25be6a4e880066787fe3412, type: 3}
   m_Name: health
   m_EditorClassIdentifier: 
-  name: 
-  usableCount: 0
+  name: HealthPickup
+  usableCount: 1
   uses: 0
-  key: 0
+  key: 49
