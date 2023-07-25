@@ -25,7 +25,8 @@ public class MGR_Input
     public InputDelegate MoveCallback;
     public InputDelegate JumpCallback;
     public InputDelegate LookCallback;
-    public InputDelegate AttackCallback;
+    public InputDelegate PrimaryFireCallback;
+    public InputDelegate SecondaryFireCallback;
     public InputDelegate InteractCallback;
 
     // ----------------------------------------------------------------------------
@@ -54,7 +55,8 @@ public class MGR_Input
         result.Controls.FindAction("Look").performed += result.LookCtx;
         result.Controls.FindAction("Look").canceled += result.LookCancelCtx;
         result.Controls.FindAction("Jump").performed += result.JumpCtx;
-        result.Controls.FindAction("Attack").performed += result.AttackCtx;
+        result.Controls.FindAction("PrimaryFire").performed += result.PrimaryFireCtx;
+        result.Controls.FindAction("SecondaryFire").performed += result.SecondaryFireCtx;
         result.Controls.FindAction("Interact").performed += result.InteractCtx;
       
         return result;
@@ -108,11 +110,18 @@ public class MGR_Input
         JumpCallback?.Invoke();
     }
 
-    public void AttackCtx(InputAction.CallbackContext ctx)
+    public void PrimaryFireCtx(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         
-        AttackCallback?.Invoke();
+        PrimaryFireCallback?.Invoke();
+    }
+
+    public void SecondaryFireCtx(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        SecondaryFireCallback?.Invoke();
     }
 
     public void InteractCtx(InputAction.CallbackContext ctx)
