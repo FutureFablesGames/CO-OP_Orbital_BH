@@ -192,7 +192,8 @@ MonoBehaviour:
   PlanetReference: {fileID: 926043698}
   SpawnCount: 5
   SpawnRadius: 15
-  spawnPts: []
+  spawnPts:
+  - {x: -1.384, y: 18.16, z: 6.6}
   Debug_Spawn: 1
 --- !u!4 &247101718
 Transform:
@@ -496,10 +497,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 658844916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac8a83ced717de4e9fc160f86f93034, type: 3}
+  m_Script: {fileID: 11500000, guid: c057cf20df188b54c90cee1cef490325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4ca44f1747185db479715ab8e3800e9e, type: 2}
+  item: {fileID: 11400000, guid: a5c265b03e2a3944cbe98b23c3e95b02, type: 2}
 --- !u!65 &658844918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1135,10 +1136,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 952344635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac8a83ced717de4e9fc160f86f93034, type: 3}
+  m_Script: {fileID: 11500000, guid: c057cf20df188b54c90cee1cef490325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4ca44f1747185db479715ab8e3800e9e, type: 2}
+  item: {fileID: 11400000, guid: a5c265b03e2a3944cbe98b23c3e95b02, type: 2}
 --- !u!65 &952344637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2671,7 +2672,7 @@ MonoBehaviour:
   targetInteractable: {fileID: 0}
   CurrentResources: 0
   PromptDisplay: {fileID: 307401285}
-  currentWeapon: {fileID: 1416734640}
+  currentWeapon: {fileID: 959449077}
 --- !u!1 &8420609713627806708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,6 +2817,7 @@ GameObject:
   - component: {fileID: 8420609714742116474}
   - component: {fileID: 8420609714742116475}
   - component: {fileID: 8420609714742116476}
+  - component: {fileID: 8420609714742116477}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2892,6 +2894,21 @@ MonoBehaviour:
   PrelimTargets: []
   Targets: []
   Difference: {x: 0, y: 0, z: 0}
+--- !u!114 &8420609714742116477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420609714742116473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718cd205e7d7b3241bbdca76b7ab4fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItems: []
+  maxSlots: 1
+  currentSlots: 0
 --- !u!20 &8420609714889556368
 Camera:
   m_ObjectHideFlags: 0

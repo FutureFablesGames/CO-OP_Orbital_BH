@@ -28,6 +28,7 @@ public class MGR_Input
     public InputDelegate PrimaryFireCallback;
     public InputDelegate SecondaryFireCallback;
     public InputDelegate InteractCallback;
+    public InputDelegate Item1Callback;
 
     // ----------------------------------------------------------------------------
     // Initialization
@@ -58,6 +59,7 @@ public class MGR_Input
         result.Controls.FindAction("PrimaryFire").performed += result.PrimaryFireCtx;
         result.Controls.FindAction("SecondaryFire").performed += result.SecondaryFireCtx;
         result.Controls.FindAction("Interact").performed += result.InteractCtx;
+        result.Controls.FindAction("Item1").performed += result.Item1Ctx;
       
         return result;
     }
@@ -129,6 +131,13 @@ public class MGR_Input
         if (!ctx.performed) return;
         
         InteractCallback?.Invoke();
+    }
+
+    public void Item1Ctx(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        Item1Callback?.Invoke();
     }
 
 }
