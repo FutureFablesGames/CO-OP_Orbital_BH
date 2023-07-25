@@ -37,18 +37,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PrimaryFire"",
+                    ""name"": ""Attack"",
                     ""type"": ""Value"",
                     ""id"": ""329b63be-8102-47f3-bf52-15a3cc645351"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SecondaryFire"",
-                    ""type"": ""Value"",
-                    ""id"": ""3f59f24c-a4f0-41f8-888a-dd617698778b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -76,6 +67,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Value"",
                     ""id"": ""5e4e1daf-8c3c-436f-a1bc-ced30816da45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Item1"",
+                    ""type"": ""Value"",
+                    ""id"": ""7e7d8914-1468-4692-883c-dbf36cf4f3aa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -145,7 +145,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryFire"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -184,12 +184,12 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a5b0a56d-1dfa-4e57-b13d-5bd6d444919e"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""a9c53983-557f-4273-a22a-6d738b585c45"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SecondaryFire"",
+                    ""action"": ""Item1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -229,11 +229,11 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_PrimaryFire = m_Game.FindAction("PrimaryFire", throwIfNotFound: true);
-        m_Game_SecondaryFire = m_Game.FindAction("SecondaryFire", throwIfNotFound: true);
+        m_Game_Attack = m_Game.FindAction("Attack", throwIfNotFound: true);
         m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
         m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
+        m_Game_Item1 = m_Game.FindAction("Item1", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -299,21 +299,21 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Game;
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
     private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_PrimaryFire;
-    private readonly InputAction m_Game_SecondaryFire;
+    private readonly InputAction m_Game_Attack;
     private readonly InputAction m_Game_Jump;
     private readonly InputAction m_Game_Look;
     private readonly InputAction m_Game_Interact;
+    private readonly InputAction m_Game_Item1;
     public struct GameActions
     {
         private @ActionMap m_Wrapper;
         public GameActions(@ActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Game_Move;
-        public InputAction @PrimaryFire => m_Wrapper.m_Game_PrimaryFire;
-        public InputAction @SecondaryFire => m_Wrapper.m_Game_SecondaryFire;
+        public InputAction @Attack => m_Wrapper.m_Game_Attack;
         public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputAction @Look => m_Wrapper.m_Game_Look;
         public InputAction @Interact => m_Wrapper.m_Game_Interact;
+        public InputAction @Item1 => m_Wrapper.m_Game_Item1;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,12 +326,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @PrimaryFire.started += instance.OnPrimaryFire;
-            @PrimaryFire.performed += instance.OnPrimaryFire;
-            @PrimaryFire.canceled += instance.OnPrimaryFire;
-            @SecondaryFire.started += instance.OnSecondaryFire;
-            @SecondaryFire.performed += instance.OnSecondaryFire;
-            @SecondaryFire.canceled += instance.OnSecondaryFire;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -341,6 +338,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Item1.started += instance.OnItem1;
+            @Item1.performed += instance.OnItem1;
+            @Item1.canceled += instance.OnItem1;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -348,12 +348,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @PrimaryFire.started -= instance.OnPrimaryFire;
-            @PrimaryFire.performed -= instance.OnPrimaryFire;
-            @PrimaryFire.canceled -= instance.OnPrimaryFire;
-            @SecondaryFire.started -= instance.OnSecondaryFire;
-            @SecondaryFire.performed -= instance.OnSecondaryFire;
-            @SecondaryFire.canceled -= instance.OnSecondaryFire;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -363,6 +360,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Item1.started -= instance.OnItem1;
+            @Item1.performed -= instance.OnItem1;
+            @Item1.canceled -= instance.OnItem1;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -429,11 +429,11 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     public interface IGameActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnPrimaryFire(InputAction.CallbackContext context);
-        void OnSecondaryFire(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnItem1(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
