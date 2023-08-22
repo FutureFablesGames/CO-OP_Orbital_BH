@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 3848739037806943351}
   - component: {fileID: 8426865437469973589}
   - component: {fileID: 7669240535501281155}
+  - component: {fileID: 5231092564078036536}
   m_Layer: 9
-  m_Name: BulletPrefab
+  m_Name: CometPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8179267936944871428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,7 +96,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8179267936944871428}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -151,3 +152,15 @@ MonoBehaviour:
     m_Bits: 8
   f_GroundedDistance: 1.1
   Grounded: 0
+--- !u!114 &5231092564078036536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179267936944871428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32604a5d55db36f448d01f3b8c3032ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

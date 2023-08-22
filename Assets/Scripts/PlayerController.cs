@@ -8,12 +8,20 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    // ================================================
+    // COMPONENTS / COMPONENTS / COMPONENTS / COMPONEN
+    // ================================================
+
     [Header("Components")]
     public GameObject mesh;    
     private GravityBody gravity;
     private Rigidbody rb;
     public CameraController CameraController;
     public PlayerCharacter player;
+
+    // ================================================
+    // VARIABLES / VARIABLES / VARIABLES / VARIABLES /
+    // ================================================
 
     [Header("Motion")]
     public float f_MoveSpeed = 10f;
@@ -26,12 +34,14 @@ public class PlayerController : MonoBehaviour
     public Interactable targetInteractable = null;
 
     [Header("Handler")]    
-    AnimationHandler animationHandler;    
+    public AnimationHandler animationHandler;    
 
     [Header("UI")]
     public TMP_Text PromptDisplay = null;
 
-   
+    // ================================================
+    // MONOBEHAVIOUR / MONOBEHAVIOUR/ MONOBEHAVIOUR /    
+    // ================================================
 
     private void Awake()
     {
@@ -39,24 +49,34 @@ public class PlayerController : MonoBehaviour
         gravity = GetComponent<GravityBody>();
 
         animationHandler = GetComponent<AnimationHandler>();
-        animationHandler.Initialize(this, animationHandler.animator);    
-        
-        player = new PlayerCharacter();
-        player.Initialize();
+        animationHandler.Initialize(this, animationHandler.animator);
 
-        if (player.CurrentWeapon != null)
+        // -- REPLACE WITH LOCAL PLAYER CHECK
+        if (player != null) {
+            player.Initialize();
+        }        
+    }
+
+    private void Start()
+    {
+        if (player != null)
         {
-            player.CurrentWeapon.Owner = this;
+            Manager.UI.UpdateHealthDisplay(player);
         }
     }
 
     private void OnEnable()
     {
+        // -- REPLACE WITH LOCAL PLAYER CHECK
+        if (player == null) return;
+
         if (Manager.Input != null)
-        {
+        {   
             Manager.Input.JumpCallback += Jump;
             Manager.Input.PrimaryFireCallback += PrimaryFire;
+            Manager.Input.PrimaryFireCancelCallback += PrimaryCancel;
             Manager.Input.SecondaryFireCallback += SecondaryFire;
+            Manager.Input.SecondaryFireCancelCallback += SecondaryCancel;
             Manager.Input.InteractCallback += Interact;
             Manager.Input.SetEnable(InputMap.Game, true);
         }
@@ -65,6 +85,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
+        // -- REPLACE WITH LOCAL PLAYER CHECK
+        if (player == null) return;
+
         if (Manager.Input != null)
         {
             Manager.Input.JumpCallback -= Jump;
@@ -76,8 +99,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
-    {               
-        player.Tick();
+    {             
+        if (player != null)
+        {
+            player.Tick();
+        }
+
+        else return;
+        
 
         if (Manager.Game.State != GameState.Playing) return;
 
@@ -92,6 +121,10 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(rb.position + v_MoveDir * f_MoveSpeed * Time.fixedDeltaTime);
     }
+
+    // ================================================
+    // FUNCTIONS / FUNCTIONS / FUNCTIONS / FUNCTIONS / 
+    // ================================================
 
     private void HandleMotion()
     {
@@ -135,12 +168,22 @@ public class PlayerController : MonoBehaviour
         // Trigger Animation -- Currently only works with pickaxe.
         animationHandler.animator.SetTrigger("Swing");
         
-        player.CurrentWeapon.PrimaryFire();
+        player.inventory.CurrentWeapon.PrimaryFire();
+    }
+
+    public void PrimaryCancel()
+    {
+        player.inventory.CurrentWeapon.PrimaryCancel();
     }
 
     public void SecondaryFire()
     {
-        player.CurrentWeapon.SecondaryFire();
+        player.inventory.CurrentWeapon.SecondaryFire();
+    }
+
+    public void SecondaryCancel()
+    {
+        player.inventory.CurrentWeapon.SecondaryCancel();
     }
 
     public void Interact()
@@ -149,8 +192,7 @@ public class PlayerController : MonoBehaviour
         {
             targetInteractable.Interact(this);
         }
-    }
-
+    }   
     
     private void OnTriggerStay(Collider other)
     {

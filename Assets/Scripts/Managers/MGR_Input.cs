@@ -26,8 +26,11 @@ public class MGR_Input
     public InputDelegate JumpCallback;
     public InputDelegate LookCallback;
     public InputDelegate PrimaryFireCallback;
+    public InputDelegate PrimaryFireCancelCallback;
     public InputDelegate SecondaryFireCallback;
+    public InputDelegate SecondaryFireCancelCallback;
     public InputDelegate InteractCallback;
+    public InputDelegate SwapWeaponCallback;
     public InputDelegate Item1Callback;
 
     // ----------------------------------------------------------------------------
@@ -57,8 +60,11 @@ public class MGR_Input
         result.Controls.FindAction("Look").canceled += result.LookCancelCtx;
         result.Controls.FindAction("Jump").performed += result.JumpCtx;
         result.Controls.FindAction("PrimaryFire").performed += result.PrimaryFireCtx;
+        result.Controls.FindAction("PrimaryFire").canceled += result.PrimaryFireCancelCtx;
         result.Controls.FindAction("SecondaryFire").performed += result.SecondaryFireCtx;
+        result.Controls.FindAction("SecondaryFire").canceled += result.SecondaryFireCancelCtx;
         result.Controls.FindAction("Interact").performed += result.InteractCtx;
+        result.Controls.FindAction("Swap").performed += result.SwapWeaponCtx;
         result.Controls.FindAction("Item1").performed += result.Item1Ctx;
       
         return result;
@@ -119,11 +125,21 @@ public class MGR_Input
         PrimaryFireCallback?.Invoke();
     }
 
+    public void PrimaryFireCancelCtx(InputAction.CallbackContext ctx)
+    {
+        PrimaryFireCancelCallback?.Invoke();
+    }
+
     public void SecondaryFireCtx(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
 
         SecondaryFireCallback?.Invoke();
+    }
+
+    public void SecondaryFireCancelCtx(InputAction.CallbackContext ctx)
+    {
+        SecondaryFireCancelCallback?.Invoke();
     }
 
     public void InteractCtx(InputAction.CallbackContext ctx)
@@ -133,6 +149,12 @@ public class MGR_Input
         InteractCallback?.Invoke();
     }
 
+    public void SwapWeaponCtx(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        SwapWeaponCallback?.Invoke();
+    }
     public void Item1Ctx(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;

@@ -19,6 +19,10 @@ public class MGR_Game : MonoBehaviour
     public float TimeLimit;    
     private float time;
 
+    [Header("References")]
+    public GameObject Planet;
+    public List<GameObject> SpawnPoints = new List<GameObject>();
+
     private void Awake()
     {
         if (Manager.Game != null)
@@ -27,11 +31,6 @@ public class MGR_Game : MonoBehaviour
         }
 
         Manager.Game = this;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(Pregame());
     }
 
     private void Update()
@@ -58,10 +57,23 @@ public class MGR_Game : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        StartCoroutine(Pregame());
+    }
+
     private IEnumerator Pregame()
     {
         State = GameState.Pregame;
-        time = TimeLimit;
+        time = GameSettings.MatchDuration;
+        
+        // Spawn Players
+        for (int i = 0; i < GameSettings.PlayerCount; i++)
+        {
+            // -- REPLACE WITH SYSTEM TO DETERMINE NUMBER OF CONNECTED PLAYERS AND NUMBER OF AI
+            if (i == 0) { Instantiate(Resources.Load<GameObject>("Prefabs/PlayerPrefab"), SpawnPoints[i].transform.position, Quaternion.identity); }
+            else { Instantiate(Resources.Load<GameObject>("Prefabs/DummyPrefab"), SpawnPoints[i].transform.position, Quaternion.identity); }
+        }
 
         // Prepare the UI
         Manager.UI.UpdateTimeDisplay(time);

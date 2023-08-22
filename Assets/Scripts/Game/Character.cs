@@ -8,10 +8,11 @@ public class Character : MonoBehaviour
     // VARIABLES / VARIABLES / VARIABLES / VARIABLES /
     // ================================================
 
-    public string m_Name;
+    public string m_CharacterName;
     public PlayerStatistics m_Stats;
     public Status m_Status = new Status();
     public Dictionary<int, Effect> m_CurrentEffects = new Dictionary<int, Effect>();
+    public HealthScript m_Health;
 
     // ================================================
     // FUNCTIONS / FUNCTIONS / FUNCTIONS / FUNCTIONS / 
@@ -22,6 +23,8 @@ public class Character : MonoBehaviour
         m_Stats = PlayerStatistics.Default();
         m_Status.Dead = false;
 
+        m_Health = GetComponent<HealthScript>();
+        m_Health.Initialize(this, m_Stats.Health, m_Stats.Health);
     }
 
     public void Tick()

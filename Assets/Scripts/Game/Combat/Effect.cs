@@ -17,7 +17,7 @@ public class EffectSettings
     public int ID;  
     public string Name;
     public string Description;
-    public Sprite icon;
+    public Sprite Icon;
     public EffectType Type;
     public Effect EffectRef;
 

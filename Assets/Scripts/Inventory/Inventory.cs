@@ -4,15 +4,102 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    //character will hold this script
-    //public Item currentItem; 
+    // ================================================
+    // COMPONENTS / COMPONENTS / COMPONENTS / COMPONEN
+    // ================================================
 
+    public PlayerCharacter Owner;
+    
+    [Header("Weapons")]
+    public Weapon CurrentWeapon;    
+    [SerializeField] Weapon RangedWeapon;
+    [SerializeField] Weapon MeleeWeapon;
+
+    // ================================================
+    // VARIABLES / VARIABLES / VARIABLES / VARIABLES /
+    // ================================================
+
+    // -- Resources
+    [Header("Resources")]
+    public float CurrentResources;
+    //public float MaxResources = 500.0f;
+        
+    // -- Items
+    [Header("Items")]
     public List<Item> currentItems; //what item are we currently holding, freely swappable
-
-    //public int currentAmount;
-
     public int maxSlots;
     public int currentSlots;
+
+    // ================================================
+    // MONOBEHAVIOUR / MONOBEHAVIOUR/ MONOBEHAVIOUR /    
+    // ================================================
+
+    private void OnEnable()
+    {
+        if (Manager.Input != null)
+        {
+            Manager.Input.Item1Callback += UseItem1;
+            Manager.Input.SwapWeaponCallback += SwapWeapon;
+        }
+
+    }
+
+    private void OnDisable()
+    {
+        if (Manager.Input != null)
+        {
+            Manager.Input.Item1Callback -= UseItem1;
+            Manager.Input.SwapWeaponCallback -= SwapWeapon;
+        }
+    }
+
+    // ================================================
+    // FUNCTIONS / FUNCTIONS / FUNCTIONS / FUNCTIONS / 
+    // ================================================
+
+    public void SwapWeapon()
+    {
+        // Swap weapons
+        Weapon next = (CurrentWeapon == MeleeWeapon) ? RangedWeapon : MeleeWeapon;
+        Unequip(CurrentWeapon);
+        Equip(next);               
+    }
+
+    public void Equip(Weapon w)
+    {
+        switch (w.GetWeaponType())
+        {
+            case WeaponType.Melee:
+                // Check if it's a new weapon we're equipping
+                if (w != MeleeWeapon)
+                {
+                    Destroy(MeleeWeapon);               // -- Destroy the current weapon to remove it from the scene
+                    MeleeWeapon = w;                    // -- Set our new melee weapon reference
+                    MeleeWeapon.Owner = Owner.PC;       // -- Make sure to initialize the owner of the weapon         
+                }
+                
+                break;
+            case WeaponType.Ranged:
+                // Check if it's a new weapon we're equipping               
+                if (w != RangedWeapon)
+                {
+                    Destroy(RangedWeapon);              // -- Destroy the current weapon to remove it from the scene
+                    RangedWeapon = w;                   // -- Set our new ranged weapon reference
+                    RangedWeapon.Owner = Owner.PC;      // -- Make sure to initialize the owner of the weapon        
+                }                
+                break;
+        }
+        
+        CurrentWeapon = w;                          // -- Set our current weapon to our newly equipped weapon
+        CurrentWeapon.gameObject.SetActive(true);   // -- And don't forget to activate it on in case it's hidden.
+        Owner.PC.animationHandler.animator.SetInteger("WeaponStance", (CurrentWeapon.GetWeaponType() == WeaponType.Melee) ? 0 : 1);
+    }
+
+    public void Unequip(Weapon w)
+    {
+        CurrentWeapon.gameObject.SetActive(false);
+        CurrentWeapon = null;        
+    }
 
     public void AddItem(Item newItem)
     {
@@ -22,20 +109,7 @@ public class Inventory : MonoBehaviour
         //currentAmount = newItem.usableCount;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //currentAmount = currentItem.usableCount;
-    }
-    private void OnEnable()
-    {
-        if (Manager.Input != null)
-        {
-            Manager.Input.Item1Callback += UseItem1;
-
-        }
-
-    }
+    
 
     // Update is called once per frame
     private void UseItem1()

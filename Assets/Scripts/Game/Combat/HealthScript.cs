@@ -10,20 +10,22 @@ public class HealthScript : MonoBehaviour
     
     public Character Owner;    
 
-    private Vector2 health;
+    [SerializeField] private Vector2 health;
     public Vector2 Health { get { return health; } private set { health = value; } }    
 
     // ================================================
     // FUNCTIONS / FUNCTIONS / FUNCTIONS / FUNCTIONS / 
     // ================================================
 
-    public void Initialize(Vector2 _health)
+    public void Initialize(Character _owner, Vector2 _health)
     {
+        Owner = _owner;
         Health = _health;
     }
 
-    public void Initialize(float currentHealth, float maximumHealth)
+    public void Initialize(Character _owner, float currentHealth, float maximumHealth)
     {
+        Owner = _owner;
         Health = new Vector2(currentHealth, maximumHealth);
     }
 
@@ -69,30 +71,42 @@ public class HealthScript : MonoBehaviour
         // -- Handle Damage Calculation
         health.x -= result;
 
+        // -- Update UI
+        Manager.UI.UpdateHealthDisplay(Owner);
+
         // -- If health drops below zero, trigger death sequence
         if (health.x <= 0)
         {
             health.x = 0;
             Death();         
             return -1f;
-        }
+        }        
 
         return result;
     }
 
-    public void Heal(float amount)
+    public void Heal(Damage heal)
     {
-        health.x += amount;
+        // -- Calculate heal value
+        float result = Random.Range(heal.Amount.x, heal.Amount.y);
+
+        // -- Restore Health
+        health.x += result;
         
+        // -- Set the ceiling equal to maximum health
         if (health.x > health.y)
         {
             health.x = health.y;
         }
+
+        // -- Update UI
+        Manager.UI.UpdateHealthDisplay(Owner);
     }
 
     private void Death()
     {
         Debug.Log("Death Called");
+        Destroy(this.gameObject);   // -- REPLACE WITH SPAWNING SYSTEM
     }
 
     public float GetHpRatio() { return Health.x / Health.y; }

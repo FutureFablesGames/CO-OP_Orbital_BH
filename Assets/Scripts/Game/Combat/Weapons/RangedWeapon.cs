@@ -13,6 +13,7 @@ public abstract class RangedWeapon : Weapon
     protected bool reloading;       // Is the gun currently reloading?
     protected float reloadTimer;    // How long is the reload going to take?
 
+    public Transform shotOrigin;
     protected WaitForSeconds shotDelay = new WaitForSeconds(0.07f);
     protected float nextShotTimer;
 

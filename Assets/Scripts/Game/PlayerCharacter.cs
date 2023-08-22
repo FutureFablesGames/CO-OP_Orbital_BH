@@ -9,8 +9,28 @@ public class PlayerCharacter : Character
     // ================================================
 
     public PlayerController PC;
-    public float CurrentResources;
-    //public float MaxResources = 500.0f;
-    public Weapon CurrentWeapon;
+    public Inventory inventory;
+
+    // ================================================
+    // MONOBEHAVIOUR / MONOBEHAVIOUR/ MONOBEHAVIOUR /    
+    // ================================================
+
+    public void Start()
+    {
+        // -- Load our weapons based on loadout / player settings
+        GameObject melee = Instantiate(
+            Resources.Load<GameObject>("Prefabs/Weapons/Crystal Dagger"),
+            inventory.gameObject.transform
+            );
+
+        GameObject ranged = Instantiate(
+            Resources.Load<GameObject>("Prefabs/Weapons/Comet"),
+            inventory.gameObject.transform
+            );
+
+        // -- Equip the weapons to set ownership
+        inventory.Equip(ranged.GetComponent<Weapon>());
+        inventory.Equip(melee.GetComponent<Weapon>());
+    }
 
 }

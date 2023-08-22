@@ -14,7 +14,9 @@ public class MGR_Interface : MonoBehaviour
     public TMP_Text InventoryDisplay;
     public TMP_Text ResourcesDisplay;
     public TMP_Text TimeDisplay;
-   
+    public Image HealthBar;
+    public TMP_Text HealthDisplay;
+
     private void Awake()
     {
         if (Manager.UI != null)
@@ -49,5 +51,11 @@ public class MGR_Interface : MonoBehaviour
     public void UpdateInventoryDisplay(string text)
     {
         InventoryDisplay.text = "Inventory: " + text;
+    }
+
+    public void UpdateHealthDisplay(Character c)
+    {
+        HealthDisplay.text = Mathf.Ceil(c.m_Health.Health.x) + " / " + c.m_Health.Health.y;
+        HealthBar.fillAmount = c.m_Health.GetHpRatio();
     }
 }
