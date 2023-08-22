@@ -10,6 +10,7 @@ public static class Manager
     // SceneLoaded
     public static MainMenu MainMenu;
     public static MGR_Game Game;    
+    public static MGR_Coroutines Coroutines;
 
     // GameLoaded
     public static MGR_Scene Scene;

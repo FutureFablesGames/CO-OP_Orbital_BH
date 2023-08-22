@@ -14,29 +14,29 @@ public class ResourceDepot : Interactable
     public override void Interact(PlayerController pc)
     {
         // If the player is the assigned player, make a deposit
-        Deposit(pc, pc.CurrentResources);
+        Deposit(pc, pc.player.CurrentResources);
 
         // If the player is not the assigned player, make a withdraw / steal
-        Withdraw(pc, pc.CurrentResources);
+        Withdraw(pc, pc.player.CurrentResources);
     }
 
     private void Deposit(PlayerController pc, float amount)
     {
         Amount += amount;
-        pc.CurrentResources -= amount;
+        pc.player.CurrentResources -= amount;
 
         Manager.UI.UpdateResourcesDisplay(Amount.ToString("F2"));
-        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
+        Manager.UI.UpdateInventoryDisplay(pc.player.CurrentResources.ToString("F2"));
         ValueDisplay.text = Amount.ToString("F2");
     }
 
     private void Withdraw(PlayerController pc, float amount)
     {
         Amount -= amount;
-        pc.CurrentResources += amount;
+        pc.player.CurrentResources += amount;
 
         Manager.UI.UpdateResourcesDisplay(Amount.ToString("F2"));
-        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
+        Manager.UI.UpdateInventoryDisplay(pc.player.CurrentResources.ToString("F2"));
         ValueDisplay.text = Amount.ToString("F2");
     }
 }

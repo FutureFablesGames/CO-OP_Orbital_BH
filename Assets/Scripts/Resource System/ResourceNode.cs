@@ -17,11 +17,11 @@ public class ResourceNode : MonoBehaviour
         amount = Random.Range(harvestPower * 0.9f, harvestPower * 1.1f);
 
         // Give resources to the player
-        pc.CurrentResources += amount;
+        pc.player.CurrentResources += amount;
         Amount -= amount;
 
         // Update the Player Inventory Display
-        Manager.UI.UpdateInventoryDisplay(pc.CurrentResources.ToString("F2"));
+        Manager.UI.UpdateInventoryDisplay(pc.player.CurrentResources.ToString("F2"));
 
         // Check if there are resources left
         if (Amount <= 0)

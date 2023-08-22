@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private GravityBody gravity;
     private Rigidbody rb;
     public CameraController CameraController;
+    public PlayerCharacter player;
 
     [Header("Motion")]
     public float f_MoveSpeed = 10f;
@@ -27,15 +28,10 @@ public class PlayerController : MonoBehaviour
     [Header("Handler")]    
     AnimationHandler animationHandler;    
 
-    [Header("Resources")]
-    public float CurrentResources;
-    //public float MaxResources = 500.0f;
-
     [Header("UI")]
     public TMP_Text PromptDisplay = null;
 
-    // TEMP: Weapon Inventory
-    public Weapon currentWeapon = null;
+   
 
     private void Awake()
     {
@@ -43,11 +39,14 @@ public class PlayerController : MonoBehaviour
         gravity = GetComponent<GravityBody>();
 
         animationHandler = GetComponent<AnimationHandler>();
-        animationHandler.Initialize(this, animationHandler.animator);            
+        animationHandler.Initialize(this, animationHandler.animator);    
+        
+        player = new PlayerCharacter();
+        player.Initialize();
 
-        if (currentWeapon != null)
+        if (player.CurrentWeapon != null)
         {
-            currentWeapon.Owner = this;
+            player.CurrentWeapon.Owner = this;
         }
     }
 
@@ -77,7 +76,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
-    {                
+    {               
+        player.Tick();
+
         if (Manager.Game.State != GameState.Playing) return;
 
         HandleMotion();      
@@ -134,12 +135,12 @@ public class PlayerController : MonoBehaviour
         // Trigger Animation -- Currently only works with pickaxe.
         animationHandler.animator.SetTrigger("Swing");
         
-        currentWeapon.PrimaryFire();
+        player.CurrentWeapon.PrimaryFire();
     }
 
     public void SecondaryFire()
     {
-        currentWeapon.SecondaryFire();
+        player.CurrentWeapon.SecondaryFire();
     }
 
     public void Interact()
