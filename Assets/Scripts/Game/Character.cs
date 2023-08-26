@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     public PlayerStatistics m_Stats;
     public Status m_Status = new Status();
     public Dictionary<int, Effect> m_CurrentEffects = new Dictionary<int, Effect>();
-    public HealthScript m_Health;
+    [HideInInspector] public HealthScript m_Health;
 
     // ================================================
     // FUNCTIONS / FUNCTIONS / FUNCTIONS / FUNCTIONS / 

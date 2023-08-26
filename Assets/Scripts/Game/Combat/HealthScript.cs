@@ -8,7 +8,7 @@ public class HealthScript : MonoBehaviour
     // VARIABLES / VARIABLES / VARIABLES / VARIABLES /
     // ================================================
     
-    public Character Owner;    
+    private Character Owner;    
 
     [SerializeField] private Vector2 health;
     public Vector2 Health { get { return health; } private set { health = value; } }    

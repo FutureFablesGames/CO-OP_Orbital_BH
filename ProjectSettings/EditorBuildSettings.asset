@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sandbox.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/ControllerSampleScene.unity
+    guid: 63345d807cace2142a44e5982f4da4ea
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e9fa66cdb87358a45a874a4e0c88af08, type: 2}

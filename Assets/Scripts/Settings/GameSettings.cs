@@ -35,4 +35,9 @@ public class GameSettings : MonoBehaviour
                 return new Vector3(720, 720, 720);
         }
     }
+
+    public static void SetGlobalGravity(Vector3 gravity)
+    {
+        Physics.gravity = gravity;
+    }
 }

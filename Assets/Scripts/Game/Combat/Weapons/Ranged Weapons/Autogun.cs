@@ -26,13 +26,14 @@ public class Autogun : RangedWeapon
     {
         // Tie in any shot functionality here
         Debug.Log("Autogun Primary Called!");
-
-        PrimaryRoutine = StartCoroutine(Shoot());
-        
+     
+        PrimaryRoutine = StartCoroutine(Shoot());        
     }
 
     override public void PrimaryCancel()
     {
+        Owner.animationHandler.animator.SetBool("Attack", false);
+
         if (PrimaryRoutine != null)
         {
             StopCoroutine(PrimaryRoutine);
@@ -43,23 +44,37 @@ public class Autogun : RangedWeapon
     {
         while (true)
         {
-            GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/BulletPrefab");
-            GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
-            Bullet.GetComponent<Rigidbody>().velocity = Owner.mesh.transform.forward * 5;
-            Bullet.GetComponent<Bullet>().Target = Owner.mesh.transform.forward;
-
+            if (Owner.animationHandler.animator.GetBool("Attack"))
+            {
+                GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/BulletPrefab");
+                GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Owner.FollowTarget.transform.rotation);
+                Bullet.GetComponent<Rigidbody>().velocity = Bullet.transform.forward * 5;
+            }
+            
             yield return rate;
         }    
     }
 
     override public void SecondaryFire()
     {
-        // Tie in any secondary fire functionality here (ex. sniper zooming or burst fire)
-        Debug.Log("Autogun Secondary Called!");
+        Owner.b_IsAiming = true;
+        Owner.animationHandler.currentState.Aiming = true;
     }
 
     override public void SecondaryCancel()
     {
+        Owner.b_IsAiming = false;
+        Owner.animationHandler.currentState.Aiming = false;
+    }
+
+    override public void OnEquip()
+    {
+
+    }
+
+    override public void OnUnequip()
+    {
+
     }
 
     // -------------------------------------------------------

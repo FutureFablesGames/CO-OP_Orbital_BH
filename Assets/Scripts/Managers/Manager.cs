@@ -15,7 +15,6 @@ public static class Manager
     // GameLoaded
     public static MGR_Scene Scene;
     public static MGR_Loading Loader;
-    public static MGR_Input Input;
     public static MGR_Network Network;
     public static MGR_Audio Audio;
     public static MGR_Asset Assets;    

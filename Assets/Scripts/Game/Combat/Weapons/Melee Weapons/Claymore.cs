@@ -27,7 +27,7 @@ public class Claymore : MeleeWeapon
             Debug.Log("Claymore Primary Called!");
 
             // Hitscan from player to mouse
-            Ray ray = new Ray(Owner.mesh.transform.position, Owner.mesh.transform.forward);
+            Ray ray = new Ray(Owner.transform.position, Owner.transform.forward);
 
             if (Physics.Raycast(ray, out RaycastHit hit, range))
             {
@@ -58,13 +58,13 @@ public class Claymore : MeleeWeapon
                 }
             }
 
-            nextAttackTimer += attackSpeed;
-        }
+            nextAttackTimer += attackSpeed;            
+        }        
     }
 
     override public void PrimaryCancel()
     {
-        throw new System.NotImplementedException();
+        Owner.animationHandler.animator.SetBool("Attack", false);
     }
 
     public override void SecondaryFire()
@@ -75,7 +75,17 @@ public class Claymore : MeleeWeapon
 
     override public void SecondaryCancel()
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    override public void OnEquip()
+    {
+
+    }
+
+    override public void OnUnequip()
+    {
+
     }
 
     // -------------------------------------------------------

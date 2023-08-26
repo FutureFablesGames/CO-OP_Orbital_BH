@@ -8,23 +8,29 @@ public class PlayerCharacter : Character
     // VARIABLES / VARIABLES / VARIABLES / VARIABLES /
     // ================================================
 
-    public PlayerController PC;
+    [HideInInspector] public PlayerController PC;
     public Inventory inventory;
 
     // ================================================
     // MONOBEHAVIOUR / MONOBEHAVIOUR/ MONOBEHAVIOUR /    
     // ================================================
 
+    private void Awake()
+    {
+        PC = GetComponent<PlayerController>();
+        inventory.Owner = this;
+    }
+
     public void Start()
     {
         // -- Load our weapons based on loadout / player settings
         GameObject melee = Instantiate(
-            Resources.Load<GameObject>("Prefabs/Weapons/Crystal Dagger"),
+            Resources.Load<GameObject>("Prefabs/Weapons/Pickaxe"),
             inventory.gameObject.transform
             );
 
         GameObject ranged = Instantiate(
-            Resources.Load<GameObject>("Prefabs/Weapons/Comet"),
+            Resources.Load<GameObject>("Prefabs/Weapons/Autogun"),
             inventory.gameObject.transform
             );
 

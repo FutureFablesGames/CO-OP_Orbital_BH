@@ -16,21 +16,21 @@ public struct PlayerStatistics
     public int Resistance;  // -- How much elemental damage should be negated upon taking damage
 
     // -- RANGED STATS
-    public int Ranged_Power;    // -- How much additional damage ranged weapons will deal
-    public float Ranged_Speed;
-    public float Ranged_Crit_Rate;           // -- How frequent will you deal bonus damage with a ranged weapon
-    public float Ranged_Crit_Multiplier;     // -- How much bonus damage will you deal with a ranged critical hit
+    public float Ranged_Power;                  // -- How much additional damage ranged weapons will deal
+    public float Ranged_Speed;                  // -- How fast can you attack with a ranged weapon
+    public float Ranged_Crit_Rate;              // -- How frequent will you deal bonus damage with a ranged weapon
+    public float Ranged_Crit_Multiplier;        // -- How much bonus damage will you deal with a ranged critical hit
 
     // -- MELEE STATS
-    public int Melee_Power;                 // -- How much additional damage melee weapons will deal
-    public float Melee_Speed;               // -- How fast can you attack with a melee weapon
-    public float Melee_Crit_Rate;           // -- How frequent will you deal bonus damage with a melee weapon
-    public float Melee_Crit_Multiplier;     // -- How much bonus damage will you deal with a melee critical hit
+    public float Melee_Power;                   // -- How much additional damage melee weapons will deal
+    public float Melee_Speed;                   // -- How fast can you attack with a melee weapon
+    public float Melee_Crit_Rate;               // -- How frequent will you deal bonus damage with a melee weapon
+    public float Melee_Crit_Multiplier;         // -- How much bonus damage will you deal with a melee critical hit
 
     // -- OTHER STATS
-    public int Movement_Speed;              // -- How fast can the character move
-    public int Harvest_Power;               // -- How effective harvesting tools are
-    public int Jump_Power;                  // -- How high can the character jump
+    public float Movement_Speed;              // -- How fast can the character move
+    public float Harvest_Power;               // -- How effective harvesting tools are
+    public float Jump_Power;                  // -- How high can the character jump
 
     // ================================================
     // INITIALIZATION / INITIALIZATION / INITIALIZATIO
@@ -53,9 +53,9 @@ public struct PlayerStatistics
         PlayerStatistics result = new PlayerStatistics()
         {
             Health = 100, Armor = 0, Resistance = 0,
-            Ranged_Power = 0, Ranged_Speed = 1f, Ranged_Crit_Rate = 0f, Ranged_Crit_Multiplier = 1.5f,
-            Melee_Power = 0, Melee_Speed = 1f, Melee_Crit_Rate = 0f, Melee_Crit_Multiplier = 1.5f,
-            Movement_Speed = 1, Jump_Power = 1, Harvest_Power = 1,
+            Ranged_Power = 1f, Ranged_Speed = 1f, Ranged_Crit_Rate = 0f, Ranged_Crit_Multiplier = 1.5f,
+            Melee_Power = 1f, Melee_Speed = 1f, Melee_Crit_Rate = 0f, Melee_Crit_Multiplier = 1.5f,
+            Movement_Speed = 1f, Jump_Power = 1f, Harvest_Power = 1f,
         };
 
         return result;

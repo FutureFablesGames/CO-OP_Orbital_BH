@@ -27,7 +27,7 @@ public class CrystalDagger : MeleeWeapon
             Debug.Log("Dagger Primary Called!");
 
             // Hitscan from player to mouse
-            Ray ray = new Ray(Owner.mesh.transform.position, Owner.mesh.transform.forward);
+            Ray ray = new Ray(Owner.transform.position, Owner.transform.forward);
 
             if (Physics.Raycast(ray, out RaycastHit hit, range))
             {
@@ -58,13 +58,13 @@ public class CrystalDagger : MeleeWeapon
                 }
             }
 
-            nextAttackTimer += attackSpeed;
-        }
+            nextAttackTimer += attackSpeed;            
+        }        
     }
 
     override public void PrimaryCancel()
     {
-        
+        Owner.animationHandler.animator.SetBool("Attack", false);
     }
 
     public override void SecondaryFire()
@@ -76,6 +76,28 @@ public class CrystalDagger : MeleeWeapon
     override public void SecondaryCancel()
     {
         
+    }
+
+    override public void OnEquip()
+    {
+        // Increase Player Speed
+        Owner.player.m_Stats.Movement_Speed += 0.5f;
+        Owner.player.m_Stats.Melee_Speed += 1f;
+
+        // Update Animator
+        Owner.animationHandler.animator.SetFloat("MoveSpeedMultiplier", Owner.player.m_Stats.Movement_Speed);
+        Owner.animationHandler.animator.SetFloat("MeleeAttackSpeedMultiplier", Owner.player.m_Stats.Melee_Speed);
+    }
+
+    override public void OnUnequip()
+    {
+        // Decrease Player Speed
+        Owner.player.m_Stats.Movement_Speed -= 0.5f;
+        Owner.player.m_Stats.Melee_Speed -= 1f;
+
+        // Update Animator
+        Owner.animationHandler.animator.SetFloat("MoveSpeedMultiplier", Owner.player.m_Stats.Movement_Speed);
+        Owner.animationHandler.animator.SetFloat("MeleeAttackSpeedMultiplier", Owner.player.m_Stats.Melee_Speed);
     }
 
     // -------------------------------------------------------

@@ -98,6 +98,15 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Value"",
+                    ""id"": ""a81b874d-0bac-4efc-8ced-7fa5560e9dd2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""Swap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b272c12-66da-4d78-8fa7-ca37b0fe50c9"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -276,6 +296,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
         m_Game_Item1 = m_Game.FindAction("Item1", throwIfNotFound: true);
         m_Game_Swap = m_Game.FindAction("Swap", throwIfNotFound: true);
+        m_Game_Sprint = m_Game.FindAction("Sprint", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -348,6 +369,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Interact;
     private readonly InputAction m_Game_Item1;
     private readonly InputAction m_Game_Swap;
+    private readonly InputAction m_Game_Sprint;
     public struct GameActions
     {
         private @ActionMap m_Wrapper;
@@ -360,6 +382,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Game_Interact;
         public InputAction @Item1 => m_Wrapper.m_Game_Item1;
         public InputAction @Swap => m_Wrapper.m_Game_Swap;
+        public InputAction @Sprint => m_Wrapper.m_Game_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,6 +416,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Swap.started += instance.OnSwap;
             @Swap.performed += instance.OnSwap;
             @Swap.canceled += instance.OnSwap;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -421,6 +447,9 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
             @Swap.started -= instance.OnSwap;
             @Swap.performed -= instance.OnSwap;
             @Swap.canceled -= instance.OnSwap;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -494,6 +523,7 @@ public partial class @ActionMap: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnItem1(InputAction.CallbackContext context);
         void OnSwap(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

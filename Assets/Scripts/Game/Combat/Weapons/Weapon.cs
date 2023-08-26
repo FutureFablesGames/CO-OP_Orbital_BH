@@ -31,6 +31,9 @@ public abstract class Weapon : MonoBehaviour
     public abstract void SecondaryFire();
     public abstract void SecondaryCancel();
 
+    public abstract void OnEquip();
+    public abstract void OnUnequip();
+
     // -------------------------------------------------------
     // Getters & Setters
     // -------------------------------------------------------

@@ -22,27 +22,42 @@ public class Handgun : RangedWeapon
 
     override public void PrimaryFire()
     {
-        // Tie in any shot functionality here
-        Debug.Log("Handgun Primary Called!");
+        if (Owner.animationHandler.animator.GetBool("Attack"))
+        {
+            Debug.Log("Handgun Primary Called!");
+            GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/BulletPrefab");
+            GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
+            Bullet.GetComponent<Rigidbody>().velocity = Owner.transform.forward * 5;
+        }
 
-        GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/BulletPrefab");
-        GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
-        Bullet.GetComponent<Rigidbody>().velocity = Owner.mesh.transform.forward * 5;
-        Bullet.GetComponent<Bullet>().Target = Owner.mesh.transform.forward;
+        Owner.animationHandler.animator.SetBool("Attack", false);
     }
 
     override public void PrimaryCancel()
     {
+
     }
 
     override public void SecondaryFire()
     {
-        // Tie in any secondary fire functionality here (ex. sniper zooming or burst fire)
-        Debug.Log("Handgun Secondary Called!");
+        Owner.b_IsAiming = true;
+        Owner.animationHandler.currentState.Aiming = true;
     }
 
     override public void SecondaryCancel()
     {
+        Owner.b_IsAiming = false;
+        Owner.animationHandler.currentState.Aiming = false;
+    }
+
+    override public void OnEquip()
+    {
+
+    }
+
+    override public void OnUnequip()
+    {
+
     }
 
     // -------------------------------------------------------

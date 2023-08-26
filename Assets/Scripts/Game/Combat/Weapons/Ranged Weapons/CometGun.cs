@@ -16,37 +16,50 @@ public class CometGun : RangedWeapon
     const int clipSize = 1;             // How many bullets can be loaded in a clip before reloading?
     const int maxAmmo = 64;             // What's the maximum amount of ammo that can be carried for the gun?
 
+    private bool canShoot = true;
+
     // -------------------------------------------------------
     // Overridable Functions
     // -------------------------------------------------------
 
     override public void PrimaryFire()
-    {
-        // Tie in any shot functionality here
-        Debug.Log("Comet Gun Primary Called!");
-        GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/BulletPrefab");
-        GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
-        Bullet.GetComponent<Rigidbody>().velocity = Owner.mesh.transform.forward * 5;
-        Bullet.GetComponent<Bullet>().Target = Owner.mesh.transform.forward;
+    {        
+        if (Owner.animationHandler.animator.GetBool("Attack"))
+        {
+            Debug.Log("Comet Gun Primary Called!");
+            GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/BulletPrefab");
+            GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
+            Bullet.GetComponent<Rigidbody>().velocity = Owner.transform.forward * 5;
+        }
 
+        Owner.animationHandler.animator.SetBool("Attack", false);
     }
 
     override public void PrimaryCancel()
     {
+
     }
 
     override public void SecondaryFire()
     {
-        // Tie in any secondary fire functionality here (ex. sniper zooming or burst fire)
-        Debug.Log("Comet Gun Secondary Called!");
-        GameObject BulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/CometPrefab");
-        GameObject Bullet = Instantiate(BulletPrefab, shotOrigin.position, Quaternion.identity);
-        Bullet.GetComponent<Rigidbody>().velocity = Owner.mesh.transform.forward * 5;
-        Bullet.GetComponent<Bullet>().Target = Owner.mesh.transform.forward;
+        Owner.b_IsAiming = true;
+        Owner.animationHandler.currentState.Aiming = true;
     }
 
     override public void SecondaryCancel()
     {
+        Owner.b_IsAiming = false;
+        Owner.animationHandler.currentState.Aiming = false;
+    }
+
+    override public void OnEquip()
+    {
+
+    }
+
+    override public void OnUnequip()
+    {
+
     }
 
     // -------------------------------------------------------
