@@ -196,7 +196,8 @@ public class PlayerController : MonoBehaviour
             if (b_IsAiming)
             {
                 // Set the player rotation based on the look transform
-                transform.rotation = Quaternion.Euler(0, FollowTarget.transform.rotation.eulerAngles.y, 0);
+                transform.RotateAround(transform.position, FollowTarget.transform.rotation * Vector3.up, v_LookInput.x * f_CameraSensitivity);
+                //transform.rotation = Quaternion.Euler(0, FollowTarget.transform.rotation.eulerAngles.y, 0);
 
                 // Reset the y rotation of the look transform
                 FollowTarget.transform.localEulerAngles = new Vector3(v_LookDirection.x, 0, 0);
@@ -213,7 +214,8 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(Vector3.Lerp(transform.position, v_NextPosition, smooth));        
                 
         // Set the player rotation based on the look transform
-        transform.rotation = Quaternion.Euler(0, FollowTarget.transform.rotation.eulerAngles.y, 0);
+        transform.RotateAround(transform.position, FollowTarget.transform.rotation * Vector3.up, v_LookInput.x * f_CameraSensitivity);
+        //transform.rotation = Quaternion.Euler(0, FollowTarget.transform.rotation.eulerAngles.y, 0);
         
         // Reset the y rotation of the look transform
         FollowTarget.transform.localEulerAngles = new Vector3(v_LookDirection.x, 0, 0);
