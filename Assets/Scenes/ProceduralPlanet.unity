@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 17
-  autoUpdate: 0
+  autoUpdate: 1
   shapeSettings: {fileID: 11400000, guid: e9ded01c905087a4e9d24c451efaeaad, type: 2}
   colourSettings: {fileID: 11400000, guid: 4bb0e184c7b301b46b8c637faecc3a9c, type: 2}
   shapeSettingsFoldOut: 1

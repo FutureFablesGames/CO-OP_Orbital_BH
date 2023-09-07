@@ -6,4 +6,5 @@ using UnityEngine;
 public class ShapeSettings : ScriptableObject
 {
     public float planetRadius = 1; //1 is default
+    public NoiseSettings noiseSettings;
 }
