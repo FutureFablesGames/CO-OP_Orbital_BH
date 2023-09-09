@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract float GetBaseDamage();
     public abstract float GetRange();
     public abstract TriggerType GetTriggerType();
+    public abstract string GetWeaponType();
 
     public abstract void IncreaseLevel();
     public int GetLevel()

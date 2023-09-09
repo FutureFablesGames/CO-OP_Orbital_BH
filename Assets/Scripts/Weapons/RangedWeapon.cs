@@ -75,6 +75,8 @@ public abstract class RangedWeapon : Weapon
     // Getters & Setters
     // -------------------------------------------------------
 
+    override public string GetWeaponType(){return "Ranged";}
+
     // -- Gun Variables    
     public abstract float GetReloadTime();
     public abstract float GetCurrentReloadTimer();

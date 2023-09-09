@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shop : Interactable
 {
 
-    public GameObject shopUI;
+   
+
+    [SerializeField] GameObject shopUI;
+
+   
     public override void Interact(PlayerController pc)
     {
         //turn it on/off

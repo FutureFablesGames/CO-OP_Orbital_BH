@@ -35,5 +35,7 @@ public abstract class MeleeWeapon : Weapon
 
     // -- Melee Variables
     public abstract float GetAttackSpeed();
+    override public string GetWeaponType(){return "Melee";}
+
 
 }
