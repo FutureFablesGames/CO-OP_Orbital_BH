@@ -16,6 +16,9 @@ public class Scattergun : RangedWeapon
     const int clipSize = 8;             // How many bullets can be loaded in a clip before reloading?
     const int maxAmmo = 64;             // What's the maximum amount of ammo that can be carried for the gun?
 
+
+    
+
     // -------------------------------------------------------
     // Overridable Functions
     // -------------------------------------------------------
@@ -50,6 +53,19 @@ public class Scattergun : RangedWeapon
     override public float GetRPS() { return rps; }
     override public float GetRPM() { return rps * 60; }
     override public TriggerType GetTriggerType() { return TriggerType.SemiAuto; }
+
+     override public void IncreaseLevel() {
+
+        weaponLevel +=1;
+        //increase gun variables
+        //rate of fire
+        //reload speed
+        //damage
+        //magazine size
+
+   }
+
+
     
     // -- Ammo Reserve
     override public int GetClipSize() { return clipSize; }

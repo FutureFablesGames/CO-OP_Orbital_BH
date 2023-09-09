@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Pickaxe : MeleeWeapon
 {
+    
+    public Motion attackAnimation;
     // -------------------------------------------------------
     //  Weapon Variables
     // -------------------------------------------------------
@@ -14,11 +16,14 @@ public class Pickaxe : MeleeWeapon
     const float damage = 15.0f;         // Base Damage = 15f
     const float harvestPower = 25.0f;   // How much harvest power does the weapon have.  Unique to weapons that can harvest resource nodes.
     const float range = 2.0f;           // How far will the weapon reach?
-    const float attackSpeed = 1.0f;     // How fast does the weapon attack?  ie. 1 swing per second (60 swings per minute) Should be relative to the animation  
+    //want to be able to upgrade this state
+    float attackSpeed = 1.0f;     // How fast does the weapon attack?  ie. 1 swing per second (60 swings per minute) Should be relative to the animation  
 
     // -------------------------------------------------------
     // Overridable Functions
     // -------------------------------------------------------
+
+  
 
     public override void PrimaryFire()
     {
@@ -63,6 +68,17 @@ public class Pickaxe : MeleeWeapon
     override public float GetRange() { return range; }
     override public float GetAttackSpeed() { return attackSpeed; }
     override public TriggerType GetTriggerType() { return TriggerType.SemiAuto; }
+
+   override public void IncreaseLevel() {
+
+    weaponLevel +=1;
+    attackSpeed +=1; //testing
+    //update animation?
+    Owner.GetComponent<AnimationHandler>().animator.SetFloat("animSpeed", weaponLevel);
+    Debug.Log("Upgraded pickaxe");
+
+   }
+   
 
 
     

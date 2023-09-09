@@ -13,6 +13,8 @@ public abstract class Weapon : MonoBehaviour
 {
     public PlayerController Owner;
 
+    protected int weaponLevel = 1;
+
     // -------------------------------------------------------
     // Abstract Methodology
     // -------------------------------------------------------
@@ -28,6 +30,14 @@ public abstract class Weapon : MonoBehaviour
     public abstract float GetBaseDamage();
     public abstract float GetRange();
     public abstract TriggerType GetTriggerType();
+
+    public abstract void IncreaseLevel();
+    public int GetLevel()
+    {
+        return weaponLevel;
+    }
+   
+
 
 
 }
